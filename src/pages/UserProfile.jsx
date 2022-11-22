@@ -10,24 +10,24 @@ const UserProfile = () => {
   return (
       <>
       <Title title={'User Info'}/>
-    <div className="text-left w-1/3 p-10">
+    <div className="text-left md:w-1/3 w-full md:p-10 p-2">
 
         <h1 className='text-3xl font-bold'>View Profile</h1>
         <p className='font-semibold'>Sponsor photo</p>
 
         <div className="uploadimage flex items-center">
 
-            <img src="/logo192.png" className='w-32 h-32' alt="" />
+            <img src="/logo192.png" className='w-1/4' alt="" />
 
-            <div className="text-left pl-4">
+            <div className="text-left w-3/4 pl-4">
                 <p>Upload your photo</p>
                 <p className='text-xs my-2'>Your photo should be in PNG or JPG format</p>
-                <input type="file" name="" id="" />
+                <input type="file" className='w-full' name="" id="" />
             </div>
 
         </div>
 
-        <form action="" className='mt-4'>
+        <form action="" onSubmit={handleSubmit} className='mt-4'>
 
                 <p className='font-semibold mt-3'>Full Name</p>
                 <input type="text" className='px-2 py-1 mt-1 w-full border outline-none rounded-md' placeholder='Your Full Name' name='fullName' />

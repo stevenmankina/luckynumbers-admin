@@ -96,7 +96,10 @@ const Layout = () => {
         )}
 
         <div className="maincomponent md:w-10/12 w-full  md:p-6 p-2">
-          <UserInfo/>
+
+          
+
+          <UserProfile/>
 
 
         </div>
