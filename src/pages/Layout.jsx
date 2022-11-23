@@ -95,11 +95,11 @@ const Layout = () => {
           </div>
         )}
 
-        <div className="maincomponent md:w-10/12 w-full  md:p-6 p-2">
+        <div className="maincomponent md:w-10/12 w-full ">
 
           
 
-          <UserProfile/>
+          <UserInfo/>
 
 
         </div>

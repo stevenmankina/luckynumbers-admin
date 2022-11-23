@@ -1,18 +1,33 @@
 import { MagnifyingGlass } from "phosphor-react";
-import React from "react";
+import React, { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import Title from "../components/Title";
+import UserProfile from "./UserProfile";
 
 const UserInfo = () => {
+
+  const [popup, setPopup] = useState(false);
+
   return (
     <>
-      <Title title={"User Info"} />
 
-      <div>
+{popup && <div className=" bg-black h-screen fixed bg-opacity-30 w-10/12 flex justify-center m-auto self-center">
+
+       <UserProfile setPopup={setPopup} />
+
+      </div>}
+
+      <div className="md:p-6 p-2">
+
+        
+        <Title title={"User Info"} />
 
         <SearchBar />
 
-            <div className="p-7"></div>
+            <div className="p-7">
+              <button onClick={()=> setPopup(true)} className='px-3 py-1 rounded text-white bg-primary-500'>Add User</button>
+            
+            </div>
 
         <table class="md:table-auto w-11/12 ">
           <thead className="bg-neutral-100">
@@ -104,6 +119,7 @@ const UserInfo = () => {
           </tbody>
         </table>
       </div>
+
     </>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react'
 import Title from '../components/Title'
 
-const UserProfile = () => {
+const UserProfile = ({setPopup}) => {
 
     const handleSubmit = (e) => {
         console.log(e);
@@ -9,8 +9,11 @@ const UserProfile = () => {
 
   return (
       <>
-      <Title title={'User Info'}/>
-    <div className="text-left md:w-1/3 w-full md:p-10 p-2">
+      {/* <Title title={'User Info'}/> */}
+
+
+
+    <div className="text-left w-full md:w-1/3  bg-white md:p-10 p-2">
 
         <h1 className='text-3xl font-bold'>View Profile</h1>
         <p className='font-semibold'>Sponsor photo</p>
@@ -53,6 +56,7 @@ const UserProfile = () => {
 
 
         <button className='px-3 py-1 mt-2 rounded text-white bg-primary-400'>Delete Account</button>
+        <button onClick={()=> setPopup(false)} className='px-3 py-1 mt-2 mx-3 rounded text-white bg-primary-400'>Cancel</button>
 
 
     </div>
