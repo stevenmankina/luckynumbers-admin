@@ -13,6 +13,7 @@ import {
 import Dashboard from "./Dashboard";
 import UserProfile from "./UserProfile";
 import UserInfo from "./UserInfo";
+import Analytics from "./Analytics";
 
 const Layout = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -28,7 +29,10 @@ const Layout = () => {
 
       <div className="flex md:flex-row flex-col">
         {/* PC Nav  */}
-        <div className="sidebar md:block hidden bg-primary-100 w-100 md:w-2/12 h-[100vh] p-3">
+        <div className="sidebar md:block hidden bg-primary-100 w-100 md:w-2/12 h-[100vh]">
+          
+          <div className="fixed md:w-2/12 p-3">
+
           <div className="logo w-2/4 m-auto">
             <img src="/lucky-numbers.png" className="w-full" alt="" />
           </div>
@@ -58,6 +62,7 @@ const Layout = () => {
             <EnvelopeSimple size={32} />
             <span className="font-semibold pl-4">Marketing Emails</span>
           </div>
+        </div>
         </div>
 
         {/* Mobile Nav  */}
@@ -99,7 +104,7 @@ const Layout = () => {
 
           
 
-          <UserInfo/>
+          <Analytics/>
 
 
         </div>
