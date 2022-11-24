@@ -14,6 +14,8 @@ import Dashboard from "./Dashboard";
 import UserProfile from "./UserProfile";
 import UserInfo from "./UserInfo";
 import Analytics from "./Analytics";
+import Sponsors from "./Sponsors";
+import LuckyNumbers from "./LuckyNumbers";
 
 const Layout = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -103,8 +105,8 @@ const Layout = () => {
         <div className="maincomponent md:w-10/12 w-full ">
 
           
-
-          <Analytics/>
+           <LuckyNumbers/>
+        
 
 
         </div>
