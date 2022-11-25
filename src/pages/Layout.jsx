@@ -7,6 +7,7 @@ import Sponsors from "./Sponsors";
 import LuckyNumbers from "./LuckyNumbers";
 import Navbar from "../components/Navbar";
 import { Route, Routes } from "react-router-dom";
+import Marketing from "./Marketing";
 
 const Layout = () => {
 
@@ -26,7 +27,7 @@ const Layout = () => {
             <Route path="/analytics" element={<Analytics/>}/>
             <Route path="/luckynumbers" element={<LuckyNumbers/>}/>
             <Route path="/sponsors" element={<Sponsors/>}/>
-            <Route path="/marketing" element={<Dashboard/>}/>
+            <Route path="/marketing" element={<Marketing/>}/>
 
 
           </Routes>
