@@ -16,7 +16,7 @@ import {
 const Dashboard = () => {
   return (
     <>
-    <div className="">
+    <div className="p-2 md:p-6">
       <Title title={'Dashboard'}/>
 
       <div className="stats flex md:flex-row flex-col">
