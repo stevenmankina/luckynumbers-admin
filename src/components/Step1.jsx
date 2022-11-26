@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-const Step1 = ({ setStep }) => {
-  const date = new Date();
-
-  const todayDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-
-  const [today, setToday] = useState(todayDate);
-
-  useEffect(() => {
-    console.log(today);
-  }, [today]);
-
+const Step1 = ({ setStep, datetime, setDatetime }) => {
+  
   return (
     <div className="p-10">
       <h3 className="text-xl text-primary-500">
@@ -28,12 +19,12 @@ const Step1 = ({ setStep }) => {
         <div className="">
 
         <input
-          type="date"
-          onChange={(e) => setToday(e.target.value)}
-          value={today}
+          type="datetime-local"
+          onChange={(e) => setDatetime(e.target.value)}
+          value={datetime}
           className="outline-none border p-1 rounded-sm border-primary-500  "
           name="date"
-          id=""
+          step={1}
           />
 
         <button
@@ -46,12 +37,6 @@ const Step1 = ({ setStep }) => {
 
         
 
-        <input
-          type="time"
-          className="outline-none border p-1 rounded-sm border-primary-500"
-          name="date"
-          step={1}
-        />
       </div>
     </div>
   );
