@@ -7,6 +7,12 @@ const Step1 = ({ setStep, datetime, setDatetime }) => {
       <h3 className="text-xl text-primary-500">
         Step 1 - Add Date & Time of upcoming episode
       </h3>
+      <button
+          onClick={() => setStep(0)}
+          className=" border mx-3 px-8 border-primary-500 py-2 my-5 text-primary-500"
+        >
+          &lt; BACK TO DASHBOARD 
+        </button>
 
       <button
         onClick={() => setStep(2)}
