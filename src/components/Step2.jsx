@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-const Step1 = ({ setStep, numbers, setNumbers}) => {
-
+const Step1 = ({ setStep, numbers, setNumbers }) => {
   const [number, setNumber] = useState(null);
   const [time, setTime] = useState("00:00:00");
 
+  const numbetList = new Array(45).fill(0);
 
   const [len, setLen] = useState(0);
 
@@ -32,13 +32,19 @@ const Step1 = ({ setStep, numbers, setNumbers}) => {
     setLen(numbers.length);
   };
 
-
   return (
     <>
       <div className="p-10">
         <h3 className="text-xl text-primary-500">
           Step 2 - Add winning numbers & release time
         </h3>
+
+        <button
+          onClick={() => setStep(0)}
+          className=" border mx-3 px-8 border-primary-500 py-2 my-5 text-primary-500"
+        >
+          &lt; BACK TO DASHBOARD
+        </button>
 
         <button
           onClick={() => setStep(3)}
@@ -49,10 +55,11 @@ const Step1 = ({ setStep, numbers, setNumbers}) => {
 
         <div className="flex justify-center items-center">
           <div className="flex ">
-            <p className="px-3 py-1">Add Number</p>
+            <p className="px-3  text-primary-500 text-lg">Add Number</p>
 
             <div className="flex-col flex">
-              {len > 0 && numbers.map((obj) => (
+              {len > 0 &&
+                numbers.map((obj) => (
                   <p className="py-1 px-3 border-2 rounded-md" key={obj.number}>
                     {obj.number}
                   </p>
@@ -66,46 +73,43 @@ const Step1 = ({ setStep, numbers, setNumbers}) => {
                 id=""
               >
                 <option value={null}></option>
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-                <option value={4}>4</option>
-                <option value={5}>5</option>
-                <option value={6}>6</option>
-                <option value={7}>7</option>
-                <option value={8}>8</option>
-                <option value={9}>9</option>
-                <option value={10}>10</option>
+
+                {numbetList.map((num, i) => (
+                  <option value={i + 1}>{i + 1}</option>
+                ))}
               </select>
             </div>
           </div>
           <div className="flex ">
-            <p className="px-3">Add Time</p>
+            <p className="px-3 text-primary-500 text-lg">Add Time</p>
 
             <div className=" flex flex-col">
-              {len > 0 && numbers.map((obj) => (
-                  <p className="py-1 px-3 border-2 rounded-md" key={obj.number}>
-                    {obj.time}
-                  </p>
-                ))}
-                
-              <input
-                type="time"
-                value={time}
-                onChange={(e) => setTime(e.target.value)}
-                className="outline-none border-2 py-1 px-2 my-1 rounded-md border-primary-300"
-                name="date"
-                step={1}
-              />
-            </div>
-            <div className=" flex flex-col">
-              {len > 0 && numbers.map((obj, i) => (
-                  <p className="py-1 px-3 rounded-md cursor-pointer" onClick={()=>handleRemove(i)} key={obj.number}>
-                    X
-                  </p>
+              {len > 0 &&
+                numbers.map((obj, i) => (
+                  <div className="flex items-center" key={obj.number}>
+                    <p className="py-1 w-full px-5 border-2 rounded-md">
+                      {obj.time}
+                    </p>
+                    <p
+                      className=" px-3  rounded-md cursor-pointer"
+                      onClick={() => handleRemove(i)}
+                    >
+                      X
+                    </p>
+                  </div>
                 ))}
 
-              
+              <div className="flex">
+                <input
+                  type="time"
+                  value={time}
+                  onChange={(e) => setTime(e.target.value)}
+                  className="outline-none border-2 py-1 px-2 my-1 rounded-md border-primary-300"
+                  name="date"
+                  step={1}
+                />
+                <p className=" px-4  rounded-md cursor-pointer"></p>
+              </div>
             </div>
           </div>
         </div>
