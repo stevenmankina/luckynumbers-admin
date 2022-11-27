@@ -10,16 +10,22 @@ const SearchBar = () => {
               <p className="font-light">What do you want?</p>
             </div>
             <div className="flex md:flex-col justify-around md:w-fit w-full text-left mx-2 p-2">
-              <p className="font-semibold">Condition 1</p>
-              <p className="font-light">Pick one option</p>
+              <p className="font-semibold">Age</p>
+              <input className='border w-16 rounded border-primary-500 text-sm outline-none' type="number" name="" id="" />
             </div>
             <div className="flex md:flex-col justify-around md:w-fit w-full text-left mx-2 p-2">
-              <p className="font-semibold">Condition 2</p>
-              <p className="font-light">Pick one option</p>
+              <p className="font-semibold">Location</p>
+              <input className='border w-32 rounded border-primary-500 text-sm outline-none' type="text" name="" id="" />
             </div>
             <div className="flex md:flex-col justify-around md:w-fit w-full text-left mx-2 p-2">
-              <p className="font-semibold">Condition 3</p>
-              <p className="font-light">Pick one option</p>
+              <p className="font-semibold">Gender</p>
+
+                <select className='border rounded border-primary-500 text-sm outline-none' name="" id="">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+
             </div>
 
             <MagnifyingGlass
