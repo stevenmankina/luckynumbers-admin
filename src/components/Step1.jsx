@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from "react";
 
-const Step1 = ({ setStep }) => {
-  const date = new Date();
+const Step1 = ({ setStep, datetime, setDatetime }) => {
 
-  const todayDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+  const handleContinue = () => {
 
-  const [today, setToday] = useState(todayDate);
+    if(datetime !== null) {
+      setStep(2);
+    }
 
-  useEffect(() => {
-    console.log(today);
-  }, [today]);
-
+  }
+  
   return (
     <div className="p-10">
       <h3 className="text-xl text-primary-500">
         Step 1 - Add Date & Time of upcoming episode
       </h3>
+      <button
+          onClick={() => setStep(1)}
+          className=" border mx-3 px-8 border-primary-500 py-2 my-5 text-primary-500"
+        >
+          &lt; PREVIOUS
+        </button>
 
       <button
-        onClick={() => setStep(2)}
-        className="px-10 bg-primary-500 py-2 my-3  text-white"
+        onClick={handleContinue}
+        className={`px-10 bg-primary-500 py-2 my-3 ${datetime === null ? 'bg-primary-150 text-primary-500' : ''} text-white`}
       >
         CONTINUE &gt;
       </button>
@@ -28,16 +33,16 @@ const Step1 = ({ setStep }) => {
         <div className="">
 
         <input
-          type="date"
-          onChange={(e) => setToday(e.target.value)}
-          value={today}
+          type="datetime-local"
+          onChange={(e) => setDatetime(e.target.value)}
+          value={datetime}
           className="outline-none border p-1 rounded-sm border-primary-500  "
           name="date"
-          id=""
+          step={1}
           />
 
         <button
-          onClick={() => setStep(2)}
+          onClick={handleContinue}
           className="px-10 bg-primary-500 py-1 mx-4 text-white"
           >
           Save
@@ -46,12 +51,6 @@ const Step1 = ({ setStep }) => {
 
         
 
-        <input
-          type="time"
-          className="outline-none border p-1 rounded-sm border-primary-500"
-          name="date"
-          step={1}
-        />
       </div>
     </div>
   );
