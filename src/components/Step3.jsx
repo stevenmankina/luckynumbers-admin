@@ -9,10 +9,10 @@ const Step1 = ({ setStep }) => {
         </h3>
 
         <button
-          onClick={() => setStep(0)}
+          onClick={() => setStep(2)}
           className=" border mx-3 px-8 border-primary-500 py-2 my-5 text-primary-500"
         >
-          &lt; BACK TO DASHBOARD 
+          &lt; PREVIOUS
         </button>
 
         <button

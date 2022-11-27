@@ -32,6 +32,17 @@ const Step1 = ({ setStep, numbers, setNumbers }) => {
     setLen(numbers.length);
   };
 
+  const handleContinue = () => {
+    if(len >= 15) {
+      setStep(3);
+    }
+  }
+
+  useEffect(() => {
+    setLen(numbers.length);
+  }, [numbers.length])
+  
+
   return (
     <>
       <div className="p-10">
@@ -40,15 +51,15 @@ const Step1 = ({ setStep, numbers, setNumbers }) => {
         </h3>
 
         <button
-          onClick={() => setStep(0)}
+          onClick={() => setStep(1)}
           className=" border mx-3 px-8 border-primary-500 py-2 my-5 text-primary-500"
         >
-          &lt; BACK TO DASHBOARD
+          &lt; PREVIOUS
         </button>
 
         <button
-          onClick={() => setStep(3)}
-          className="px-10 bg-primary-500 py-2 my-3  text-white"
+          onClick={handleContinue}
+          className={`px-10 bg-primary-500 py-2 my-3 ${len < 15 ? 'bg-primary-150 text-primary-500' : ''} text-white`}
         >
           CONTINUE &gt;{" "}
         </button>

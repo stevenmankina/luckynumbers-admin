@@ -8,10 +8,8 @@ import Stepper from "../components/Stepper";
 import Title from "../components/Title";
 
 const LuckyNumbers = () => {
-  const date = new Date();
-
   const [step, setStep] = useState(0);
-  const [datetime, setDatetime] = useState(date);
+  const [datetime, setDatetime] = useState(null);
   const [numbers, setNumbers] = useState([]);
 
   
