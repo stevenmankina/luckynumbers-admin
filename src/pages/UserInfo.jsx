@@ -45,78 +45,11 @@ const UserInfo = () => {
             </tr>
           </thead>
           <tbody>
-            <tr onClick={()=> setPopup(true)} className="outline-1 outline-gray-200 outline rounded-sm ">
+            <tr className="outline-1 outline-gray-200 outline rounded-sm ">
               <th>
                 <input type="checkbox" name="single" id="" />
               </th>
-              <td className="p-3 flex">
-                <img src="/logo192.png" className="w-10 h-10 mr-2" alt="" />
-                <div className="text-left">
-                  <p className="font-semibold text-sm">Jane Cooper</p>
-                  <p className="font-light text-xs">Lorem ipsum dolor sit.</p>
-                </div>
-              </td>
-              <td className="text-sm max-md:hidden">
-                The Sliding Mr. Bones Next Stop, Pottersville
-              </td>
-              <td className="text-sm max-md:hidden">jane@email.com</td>
-              <td className="text-sm max-md:hidden">21</td>
-              <td className="text-sm max-md:hidden">21/11/22</td>
-              <td className="text-sm max-md:hidden">100</td>
-              <td>
-                <input type="checkbox" name="active" id="" />
-              </td>
-            </tr>
-            
-            <tr onClick={()=> setPopup(true)} className="outline-1 outline-gray-200 outline rounded-sm ">
-              <th>
-                <input type="checkbox" name="single" id="" />
-              </th>
-              <td className="p-3 flex">
-                <img src="/logo192.png" className="w-10 h-10 mr-2" alt="" />
-                <div className="text-left">
-                  <p className="font-semibold text-sm">Jane Cooper</p>
-                  <p className="font-light text-xs">Lorem ipsum dolor sit.</p>
-                </div>
-              </td>
-              <td className="text-sm max-md:hidden">
-                The Sliding Mr. Bones Next Stop, Pottersville
-              </td>
-              <td className="text-sm max-md:hidden">jane@email.com</td>
-              <td className="text-sm max-md:hidden">21</td>
-              <td className="text-sm max-md:hidden">21/11/22</td>
-              <td className="text-sm max-md:hidden">100</td>
-              <td>
-                <input type="checkbox" name="active" id="" />
-              </td>
-            </tr>
-            <tr onClick={()=> setPopup(true)} className="outline-1 outline-gray-200 outline rounded-sm ">
-              <th>
-                <input type="checkbox" name="single" id="" />
-              </th>
-              <td className="p-3 flex">
-                <img src="/logo192.png" className="w-10 h-10 mr-2" alt="" />
-                <div className="text-left">
-                  <p className="font-semibold text-sm">Jane Cooper</p>
-                  <p className="font-light text-xs">Lorem ipsum dolor sit.</p>
-                </div>
-              </td>
-              <td className="text-sm max-md:hidden">
-                The Sliding Mr. Bones Next Stop, Pottersville
-              </td>
-              <td className="text-sm max-md:hidden">jane@email.com</td>
-              <td className="text-sm max-md:hidden">21</td>
-              <td className="text-sm max-md:hidden">21/11/22</td>
-              <td className="text-sm max-md:hidden">100</td>
-              <td>
-                <input type="checkbox" name="active" id="" />
-              </td>
-            </tr>
-            <tr onClick={()=> setPopup(true)} className="outline-1 outline-gray-200 outline rounded-sm ">
-              <th>
-                <input type="checkbox" name="single" id="" />
-              </th>
-              <td className="p-3 flex">
+              <td onClick={()=> setPopup(true)}  className="p-3 cursor-pointer flex">
                 <img src="/logo192.png" className="w-10 h-10 mr-2" alt="" />
                 <div className="text-left">
                   <p className="font-semibold text-sm">Jane Cooper</p>
