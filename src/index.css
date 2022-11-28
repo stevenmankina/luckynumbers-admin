@@ -3,13 +3,6 @@
 @tailwind utilities;
 
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-    
-
-    
-}
-  
-input[type="date"]::-webkit-calendar-picker-indicator:hover {
-    background: transparent;
-    cursor: pointer;
+.ProseMirror {
+    outline: none !important;
 }

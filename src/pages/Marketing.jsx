@@ -1,8 +1,19 @@
+import { useEditor } from "@tiptap/react";
 import { MagnifyingGlass } from "phosphor-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import TextEditor from "../components/TextEditor";
 import Title from "../components/Title";
 
 const Marketing = () => {
+
+  const [text, setText] = useState('');
+
+  useEffect(() => {
+    
+    console.log(text);
+  }, [text])
+  
+
   return (
     <>
       <div className="p-2 md:p-6">
@@ -49,11 +60,9 @@ const Marketing = () => {
 
         <div className="float-left w-full p-6">
 
-        <textarea name="" placeholder="Your text" className="border float-left min-h-[30vh] p-1 w-8/12 outline-none border-primary-500 rounded" id="" >
+          <TextEditor text={text} setText={setText} className='outline-none' />
 
-        </textarea>
         </div>
-
 
 
 
