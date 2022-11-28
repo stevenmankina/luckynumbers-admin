@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://bingo-be-alb-1896236470.us-east-2.elb.amazonaws.com'
+export const BASE_URL = 'http://dev-api.luckynumberstv.co.uk'
