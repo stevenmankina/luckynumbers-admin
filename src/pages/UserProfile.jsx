@@ -3,7 +3,7 @@ import React from "react";
 import Title from "../components/Title";
 import { BASE_URL } from "../util/config";
 
-const UserProfile = ({ user, setUser, setPopup }) => {
+const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(e);
@@ -21,7 +21,7 @@ const UserProfile = ({ user, setUser, setPopup }) => {
     let url = `${BASE_URL}/player/register`;
 
     let data = {
-      phone: "2222222222",
+      phone: user.phone,
       firstname: "Pranil",
       lastname: "Kakade",
       email: "df@gmail.com",
@@ -31,9 +31,16 @@ const UserProfile = ({ user, setUser, setPopup }) => {
     };
 
     let res = await axios.post(url, data);
+    if(res.status === 200) {
+      getAllUsers();
+    }
+
+
   };
 
-  const updateUser = () => {};
+  const updateUser = () => {
+
+  };
 
   return (
     <>
@@ -43,7 +50,7 @@ const UserProfile = ({ user, setUser, setPopup }) => {
         <h1 className="text-3xl font-bold">View Profile</h1>
         <p className="font-semibold">Sponsor photo</p>
 
-        <div className="uploadimage flex items-center">
+        {/* <div className="uploadimage flex items-center">
           <img src="/logo192.png" className="w-1/4" alt="" />
 
           <div className="text-left w-3/4 pl-4">
@@ -53,15 +60,27 @@ const UserProfile = ({ user, setUser, setPopup }) => {
             </p>
             <input type="file" className="w-full" name="" id="" />
           </div>
-        </div>
+        </div> */}
 
         <form action="" onSubmit={handleSubmit} className="mt-4">
-          <p className="font-semibold mt-3">Full Name</p>
+          <p className="font-semibold mt-3">First Name</p>
           <input
             type="text"
             value={user ? user.firstname : ""}
             onChange={(e) => {
               setUser({ ...user, firstname: e.target.value});
+            }}
+            className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
+            placeholder="Your Full Name"
+            name="fullName"
+            required={true}
+          />
+          <p className="font-semibold mt-3">Last Name</p>
+          <input
+            type="text"
+            value={user ? user.lastname : ""}
+            onChange={(e) => {
+              setUser({ ...user, lastname: e.target.value});
             }}
             className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
             placeholder="Your Full Name"
@@ -98,9 +117,13 @@ const UserProfile = ({ user, setUser, setPopup }) => {
           <p className="font-semibold mt-3">Location</p>
           <input
             type="text"
+            value={user ? user.location : ""}
             className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
             placeholder="Your Location"
             name="location"
+            onChange={(e) => {
+              setUser({ ...user, location: e.target.value});
+            }}
           />
 
           <p className="font-semibold mt-3">About Me</p>

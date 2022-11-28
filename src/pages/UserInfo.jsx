@@ -1,5 +1,4 @@
 import axios from "axios";
-import { MagnifyingGlass } from "phosphor-react";
 import React, { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import Title from "../components/Title";
@@ -14,22 +13,36 @@ const UserInfo = () => {
 
   const [user, setUser] = useState(null);
 
-  const getAllUsers = async () => {
-    let url = `${BASE_URL}/player`;
+  const searchUsers = async (search, searchValue) => {
 
-    try {
-      let res = await axios.get(url);
-      if (res.status === 200) {
-        setUsers(res.data.data);
-      } else {
-        console.log(res.data.message);
-      }
-    } catch (error) {
-      console.log(error);
+    if(search === null || search === undefined) {
+      return;
     }
+
+    var url;
+    if(search === 1) {
+      url = `${BASE_URL}/player/age?value=${searchValue.age}`;
+    } else if (search === 2) {
+      url = `${BASE_URL}/player/location?value=${searchValue.location}`;
+    } else if (search === 3) {
+      url = `${BASE_URL}/player/gender?value=${searchValue.gender}`;
+    }
+
+    console.log(url);
+
+    // try {
+    //   let res = await axios.get(url);
+    //   if (res.status === 200) {
+    //     setUsers(res.data.data);
+    //   } else {
+    //     console.log("Error");
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
-  const getUsersByAge = async (age) => {
+  const getAllUsers = async () => {
     let url = `${BASE_URL}/player`;
 
     try {
@@ -52,14 +65,14 @@ const UserInfo = () => {
     <>
       {popup && (
         <div className=" bg-black h-screen fixed bg-opacity-30 w-10/12 flex justify-center m-auto self-center">
-          <UserProfile user={user} setUser={setUser} setPopup={setPopup} />
+          <UserProfile user={user} getAllUsers={getAllUsers} setUser={setUser} setPopup={setPopup} />
         </div>
       )}
 
       <div className="md:p-6 p-2">
         <Title title={"User Info"} />
 
-        <SearchBar />
+        <SearchBar searchUsers={searchUsers} />
 
         <div className="p-7">
           <button
@@ -77,7 +90,7 @@ const UserInfo = () => {
                 <input type="checkbox" name="allCheck" id="" />
               </th>
               <th className="p-3 font-normal">Name</th>
-              <th className="p-3 max-md:hidden font-normal">Address</th>
+              <th className="p-3 max-md:hidden font-normal">Location</th>
               <th className="p-3 max-md:hidden font-normal">Email</th>
               <th className="p-3 max-md:hidden font-normal">Age</th>
               <th className="p-3 max-md:hidden font-normal">Account Created</th>
@@ -88,28 +101,36 @@ const UserInfo = () => {
           <tbody>
             {users &&
               users.map((user) => (
-                <tr key={user._id} className="outline-1 outline-gray-200 outline rounded-sm ">
+                <tr
+                  key={user._id}
+                  className="outline-1 outline-gray-200 outline rounded-sm "
+                >
                   <th>
                     <input type="checkbox" name="single" id="" />
                   </th>
                   <td
-                    onClick={() => {setPopup(true); setUser(user)}}
+                    onClick={() => {
+                      setPopup(true);
+                      setUser(user);
+                    }}
                     className="p-3 cursor-pointer flex"
                   >
-                    <img src="/logo192.png" className="w-10 h-10 mr-2" alt="" />
+                    {/* <img src="/logo192.png" className="w-10 h-10 mr-2" alt="" /> */}
                     <div className="text-left">
-                      <p className="font-semibold text-sm">{user.firstname + user.lastname}</p>
-                      <p className="font-light text-xs">
-                        {user.phone}
+                      <p className="font-semibold text-sm">
+                        {user.firstname + " " + user.lastname}
                       </p>
+                      <p className="font-light text-xs">{user.phone}</p>
                     </div>
                   </td>
                   <td className="text-sm max-md:hidden">
-                    The Sliding Mr. Bones Next Stop, Pottersville
+                    {user.location ? user.location : "Unknown"}
                   </td>
                   <td className="text-sm max-md:hidden">{user.email}</td>
                   <td className="text-sm max-md:hidden">{getAge(user.dob)}</td>
-                  <td className="text-sm max-md:hidden">{getDate(user.created_at)}</td>
+                  <td className="text-sm max-md:hidden">
+                    {getDate(user.created_at)}
+                  </td>
                   <td className="text-sm max-md:hidden">100</td>
                   <td>
                     <input type="checkbox" name="active" id="" />
