@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://dev-api.luckynumberstv.co.uk'
+export const BASE_URL = 'https://dev-api.luckynumberstv.co.uk'
