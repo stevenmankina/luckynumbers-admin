@@ -8,15 +8,12 @@ const Marketing = () => {
 
   const [text, setText] = useState('');
 
-  useEffect(() => {
-    
-    console.log(text);
-  }, [text])
-  
+  const [subject, setSubject] = useState('');
+
 
   return (
     <>
-      <div className="p-2 md:p-6">
+      <div className="p-2 md:p-6 text-left">
         <Title title={"Marketing Emails"} />
 
         <h2 className="text-2xl font-bold text-left p-6 text-primary-500">
@@ -58,7 +55,17 @@ const Marketing = () => {
           </div>
         </div>
 
-        <div className="float-left w-full p-6">
+
+
+        <div className="text-left w-full p-6">
+        <p className="py-2 text-xl text-left">Subject:</p>
+        <input placeholder="Enter Your Subject" className="rounded p-1 w-full outline-none border-2 mr-1" type="text" value={subject} onChange={(e)=>setSubject(e.target.value)}/>
+        
+
+
+        </div>
+
+        <div className="float-left w-full px-6">
 
           <TextEditor text={text} setText={setText} className='outline-none' />
 

@@ -6,3 +6,7 @@
 .ProseMirror {
     outline: none !important;
 }
+
+.jodit-workplace, .jodit-wysiwyg {
+    min-height: 50vh !important ;
+}
