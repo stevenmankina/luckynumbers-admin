@@ -1,9 +1,10 @@
 import axios from "axios";
 import React from "react";
-import Title from "../components/Title";
 import { BASE_URL } from "../util/config";
 
 const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(e);
@@ -12,8 +13,9 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
       console.log("put");
       // updateUser();
     } else {
+      console.log(user);
       console.log("post");
-      // createUser();
+      createUser();
     }
   };
 
@@ -22,19 +24,28 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
 
     let data = {
       phone: user.phone,
-      firstname: "Pranil",
-      lastname: "Kakade",
-      email: "df@gmail.com",
-      dob: "1998-08-14",
-      gender: "Male",
-      location: "Thane",
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      dob: user.dob,
+      gender: user.gender,
+      location: user.location,
     };
 
-    let res = await axios.post(url, data);
-    if(res.status === 200) {
-      getAllUsers();
-    }
+    try {
+      
 
+    let res = await axios.post(url, data);
+    if(res.status === 201) {
+      getAllUsers();
+      console.log('User added sucessfully');
+      setPopup(false);
+    } else {
+      console.log(res.data);
+    }
+  } catch (error) {
+    console.log(error);
+  }
 
   };
 
@@ -125,17 +136,41 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
               setUser({ ...user, location: e.target.value});
             }}
           />
+          <p className="font-semibold mt-3">Date Of Birth</p>
+          <input
+            type="date"
+            value={user ? user.dob : ''}
+            className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
+            placeholder="DOB"
+            name="dateOfBirth"
+            onChange={(e) => {
+              setUser({ ...user, dob: e.target.value});
+            }}
+          />
+          <p className="font-semibold mt-3">Gender</p>
 
-          <p className="font-semibold mt-3">About Me</p>
+          <select onChange={(e) => {
+              setUser({ ...user, gender: e.target.value});
+            }} value={user ? user.gender : "Male"} 
+            className="px-2 py-1 mt-1 w-full border outline-none rounded-md">
+
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+
+          </select>
+          <br />
+
+          {/* <p className="font-semibold mt-3">About Me</p>
           <textarea
             name="about"
             className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
             rows="2"
-          ></textarea>
+          ></textarea> */}
 
           <input
             type="submit"
-            className="px-3 py-1 rounded text-white bg-primary-500"
+            className="px-3 mt-5 py-1 rounded text-white bg-primary-500"
             value="Save Profile"
           />
         </form>

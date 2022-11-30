@@ -19,7 +19,7 @@ const Step0 = ({ setStep }) => {
         <h3 className="text-4xl pb-5 text-primary-500">Saved Episodes</h3>
         <h3 className="text-xl my-7 text-primary-500">Saved Winning Numbers</h3>
 
-        <table class="md:table-auto w-11/12 m-auto ">
+        <table className="md:table-auto w-11/12 m-auto ">
           <thead className="bg-neutral-100">
             <tr className="font-thin uppercase outline-1 outline-gray-200 outline rounded-sm">
               <th className="p-3">

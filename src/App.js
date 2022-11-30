@@ -1,14 +1,16 @@
+import { useContext, useEffect } from "react";
+import { redirect } from "react-router-dom";
 import "./App.css";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthContext, AuthProvider } from "./context/AuthContext";
 import Layout from "./pages/Layout";
 
 function App() {
+
   return (
     <div className="App">
-<AuthProvider>
-  
-      <Layout />
-</AuthProvider>
+      <AuthProvider>
+        <Layout />
+      </AuthProvider>
     </div>
   );
 }

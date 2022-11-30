@@ -35,55 +35,12 @@ const SponsorsList = ({setPopup}) => {
         </td>
         <td className="text-sm max-md:hidden">janecopper@email.com</td>
         <td className="text-sm max-md:hidden">10</td>
-        <td className="text-sm max-md:hidden "> <Wrench size={20} className='m-auto' /> </td>
+        <td className="text-sm max-md:hidden cursor-pointer" onClick={()=>setPopup(true)}> <Wrench size={20} className='m-auto' /> </td>
         <td>
           <input type="checkbox" name="active" id="" />
         </td>
       </tr>
 
-      <tr className="outline-1 outline-gray-200 outline rounded-sm ">
-        <th>
-          <input type="checkbox" name="single"/>
-        </th>
-        <td className="p-3 flex">
-          <img src="/logo192.png" className="w-10 h-10 mr-2" alt="" />
-          <div className="text-left">
-            <p className="font-semibold text-sm">Jane Cooper</p>
-            <p className="font-light text-xs">Lorem ipsum dolor sit.</p>
-          </div>
-        </td>
-        <td className="text-sm max-md:hidden">
-          Lorem ipsum dolor sit 
-        </td>
-        <td className="text-sm max-md:hidden">janecopper@email.com</td>
-        <td className="text-sm max-md:hidden">10</td>
-        <td className="text-sm max-md:hidden "> <Wrench size={20} className='m-auto' /> </td>
-        <td>
-          <input type="checkbox" name="active" id="" />
-        </td>
-      </tr>
-
-      <tr className="outline-1 outline-gray-200 outline rounded-sm ">
-        <th>
-          <input type="checkbox" name="single"/>
-        </th>
-        <td className="p-3 flex">
-          <img src="/logo192.png" className="w-10 h-10 mr-2" alt="" />
-          <div className="text-left">
-            <p className="font-semibold text-sm">Jane Cooper</p>
-            <p className="font-light text-xs">Lorem ipsum dolor sit.</p>
-          </div>
-        </td>
-        <td className="text-sm max-md:hidden">
-          Lorem ipsum dolor sit 
-        </td>
-        <td className="text-sm max-md:hidden">janecopper@email.com</td>
-        <td className="text-sm max-md:hidden">10</td>
-        <td className="text-sm max-md:hidden "> <Wrench size={20} className='m-auto' /> </td>
-        <td>
-          <input type="checkbox" name="active" id="" />
-        </td>
-      </tr>
 
 
 

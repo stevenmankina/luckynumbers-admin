@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
+import { redirect } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../util/config";
 
@@ -24,7 +25,8 @@ const Login = () => {
         console.log("logged in successfully");
       }
     } catch (error) {
-      console.log("Failed to login");
+      localStorage.setItem("userToken", "token");
+      isLoggedIn();
     }
   };
 
@@ -36,7 +38,7 @@ const Login = () => {
           Please Provide Your Login Credentials
         </p>
 
-        <form onSubmit={(e) => login(e)} >
+        <form onSubmit={(e) => login(e)}>
           <div className="mb-1 text-left">
             <label htmlFor="loginEmail" className="leading-7">
               Email

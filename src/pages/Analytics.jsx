@@ -9,7 +9,7 @@ const Analytics = () => {
 
     <Title title={'Analytics'} />
 
-    <SearchBar/>
+    {/* <SearchBar/> */}
 
 
     <div className="flex flex-wrap">

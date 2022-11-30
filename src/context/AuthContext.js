@@ -12,11 +12,14 @@ export const AuthProvider = ({children}) => {
     }
 
     const isLoggedIn = async () => {
+        console.log('call');
         try {
             let userToken = localStorage.getItem('userToken');
             setUserToken(userToken);
+            return true;
         } catch (error) {
             console.log(error);
+            return false;
         }
     }
 
