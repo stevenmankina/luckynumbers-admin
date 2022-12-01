@@ -1,17 +1,15 @@
 import axios from "axios";
 import React from "react";
+import { getDate, getDateInput } from "../util/age";
 import { BASE_URL } from "../util/config";
 
 const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(e);
 
     if (user._id) {
-      console.log("put");
-      // updateUser();
+      updateUser();
     } else {
       console.log(user);
       console.log("post");
@@ -33,24 +31,44 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
     };
 
     try {
-      
-
-    let res = await axios.post(url, data);
-    if(res.status === 201) {
-      getAllUsers();
-      console.log('User added sucessfully');
-      setPopup(false);
-    } else {
-      console.log(res.data);
+      let res = await axios.post(url, data);
+      if (res.status === 201) {
+        getAllUsers();
+        console.log("User added sucessfully");
+        setPopup(false);
+      } else {
+        console.log(res.data);
+      }
+    } catch (error) {
+      console.log(error);
     }
-  } catch (error) {
-    console.log(error);
-  }
-
   };
 
-  const updateUser = () => {
+  const updateUser = async () => {
+    let url = `${BASE_URL}/player/${user._id}/update`;
 
+    let data = {
+      phone: user.phone,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      dob: user.dob,
+      gender: user.gender,
+      location: user.location,
+    };
+
+    try {
+      let res = await axios.patch(url, data);
+      if (res.status === 201) {
+        getAllUsers();
+        console.log("User Updated sucessfully");
+        setPopup(false);
+      } else {
+        console.log(res.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -79,7 +97,7 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
             type="text"
             value={user ? user.firstname : ""}
             onChange={(e) => {
-              setUser({ ...user, firstname: e.target.value});
+              setUser({ ...user, firstname: e.target.value });
             }}
             className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
             placeholder="Your Full Name"
@@ -91,7 +109,7 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
             type="text"
             value={user ? user.lastname : ""}
             onChange={(e) => {
-              setUser({ ...user, lastname: e.target.value});
+              setUser({ ...user, lastname: e.target.value });
             }}
             className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
             placeholder="Your Full Name"
@@ -104,8 +122,8 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
             type="email"
             value={user ? user.email : ""}
             onChange={(e) => {
-                setUser({ ...user, email: e.target.value});
-              }}
+              setUser({ ...user, email: e.target.value });
+            }}
             className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
             placeholder="Your Email"
             name="email"
@@ -117,8 +135,8 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
             type="text"
             value={user ? user.phone : ""}
             onChange={(e) => {
-                setUser({ ...user, phone: e.target.value});
-              }}
+              setUser({ ...user, phone: e.target.value });
+            }}
             className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
             placeholder="Your Phone Number"
             name="phoneno"
@@ -133,31 +151,32 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
             placeholder="Your Location"
             name="location"
             onChange={(e) => {
-              setUser({ ...user, location: e.target.value});
+              setUser({ ...user, location: e.target.value });
             }}
           />
           <p className="font-semibold mt-3">Date Of Birth</p>
           <input
             type="date"
-            value={user ? user.dob : ''}
+            value={user ? getDateInput(user.dob) : ""}
             className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
             placeholder="DOB"
             name="dateOfBirth"
             onChange={(e) => {
-              setUser({ ...user, dob: e.target.value});
+              setUser({ ...user, dob: e.target.value });
             }}
           />
           <p className="font-semibold mt-3">Gender</p>
 
-          <select onChange={(e) => {
-              setUser({ ...user, gender: e.target.value});
-            }} value={user ? user.gender : "Male"} 
-            className="px-2 py-1 mt-1 w-full border outline-none rounded-md">
-
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-
+          <select
+            onChange={(e) => {
+              setUser({ ...user, gender: e.target.value });
+            }}
+            value={user ? user.gender : "Male"}
+            className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
+          >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
           </select>
           <br />
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Step1 = ({ setStep, numbers }) => {
+const Step4 = ({ setStep, numbers }) => {
   return (
     <>
       <div className="p-10">
@@ -19,7 +19,7 @@ const Step1 = ({ setStep, numbers }) => {
           onClick={() => setStep(0)}
           className="px-10 border rounded-md border-primary-500 py-2 my-5 text-primary-500"
         >
-          VIEW OTHER EPISODES &gt;{" "}
+          VIEW OTHER EPISODES &gt;
         </button>
 
         <br />
@@ -35,4 +35,4 @@ const Step1 = ({ setStep, numbers }) => {
   );
 };
 
-export default Step1;
+export default Step4;

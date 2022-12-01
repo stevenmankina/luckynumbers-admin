@@ -81,7 +81,7 @@ const NavLink = ({ to, children, ...props }) => {
     <Link to={to}>
       <div
       {...props}
-        className={`tab  w-11/12 my-2 ${
+        className={`tab items-center text-left w-full my-2 ${
             isActive ? "bg-primary-500 text-white" : ""
         }  rounded-lg flex p-2 m-auto`}
         >

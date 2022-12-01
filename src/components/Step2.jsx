@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Step1 = ({ setStep, numbers, setNumbers }) => {
+const Step2 = ({ setStep, numbers, setNumbers }) => {
   const [number, setNumber] = useState(null);
   const [time, setTime] = useState("00:00:00");
 
@@ -136,4 +136,4 @@ const Step1 = ({ setStep, numbers, setNumbers }) => {
   );
 };
 
-export default Step1;
+export default Step2;

@@ -11,7 +11,16 @@ const SearchBar = ({searchUsers}) => {
   });
 
   const handleSearch = async () => {
+    
+    if(search === 1) {
+      setSearchValue({ ...searchValue, location: '', gender: 'male' });
+    } else if (search === 2) {
+      setSearchValue({ ...searchValue, age: 0, gender: 'male' });
+    } else if (search === 3) {
+      setSearchValue({ ...searchValue, age: 0, location: '' });
+    }
     await searchUsers(search, searchValue);
+
   }
 
   return (

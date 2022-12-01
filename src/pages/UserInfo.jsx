@@ -14,36 +14,36 @@ const UserInfo = () => {
   const [user, setUser] = useState(null);
 
   const searchUsers = async (search, searchValue) => {
-
-    if(search === null || search === undefined) {
+    if (search === null || search === undefined) {
       return;
     }
 
     var url;
-    if(search === 1) {
-      url = `${BASE_URL}/player/age?value=${searchValue.age}`;
+    if (search === 1) {
+      url = `${BASE_URL}/user/age?value=${searchValue.age}`;
     } else if (search === 2) {
-      url = `${BASE_URL}/player/location?value=${searchValue.location}`;
+      url = `${BASE_URL}/user/location?value=${searchValue.location}`;
     } else if (search === 3) {
-      url = `${BASE_URL}/player/gender?value=${searchValue.gender}`;
+      url = `${BASE_URL}/user/gender?value=${searchValue.gender}`;
     }
 
-    console.log(url);
+    // console.log(url);
 
-    // try {
-    //   let res = await axios.get(url);
-    //   if (res.status === 200) {
-    //     setUsers(res.data.data);
-    //   } else {
-    //     console.log("Error");
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      let res = await axios.get(url);
+      if (res.status === 200) {
+        setUsers(res.data.data);
+      } else {
+        console.log("Error");
+      }
+    } catch (error) {
+      setUsers([]);
+      console.log(error);
+    }
   };
 
   const getAllUsers = async () => {
-    let url = `${BASE_URL}/player`;
+    let url = `${BASE_URL}/user/searchAll`;
 
     try {
       let res = await axios.get(url);
@@ -65,7 +65,12 @@ const UserInfo = () => {
     <>
       {popup && (
         <div className=" bg-black h-screen fixed bg-opacity-30 w-10/12 flex justify-center m-auto self-center">
-          <UserProfile user={user} getAllUsers={getAllUsers} setUser={setUser} setPopup={setPopup} />
+          <UserProfile
+            user={user}
+            getAllUsers={getAllUsers}
+            setUser={setUser}
+            setPopup={setPopup}
+          />
         </div>
       )}
 
@@ -127,7 +132,9 @@ const UserInfo = () => {
                     {user.location ? user.location : "Unknown"}
                   </td>
                   <td className="text-sm max-md:hidden">{user.email}</td>
-                  <td className="text-sm max-md:hidden">{getAge(user.dob)}</td>
+                  <td className="text-sm max-md:hidden">
+                    {user.age ? user.age : getAge(user.dob)}
+                  </td>
                   <td className="text-sm max-md:hidden">
                     {getDate(user.created_at)}
                   </td>
@@ -139,6 +146,7 @@ const UserInfo = () => {
               ))}
           </tbody>
         </table>
+        {users && users.length === 0 && <p>No User Found with given filter</p>}
       </div>
     </>
   );
