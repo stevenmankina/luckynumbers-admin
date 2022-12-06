@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../util/config";
 
@@ -25,7 +26,9 @@ const Login = () => {
         console.log("logged in successfully");
       }
     } catch (error) {
-      localStorage.setItem("userToken", "token");
+      toast.error('Failed to login')
+      localStorage.setItem("userToken", "res.data.jwt");
+
       isLoggedIn();
     }
   };

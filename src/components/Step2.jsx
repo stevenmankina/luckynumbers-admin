@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const Step2 = ({ setStep, numbers, setNumbers }) => {
   const [number, setNumber] = useState(null);
@@ -20,6 +21,8 @@ const Step2 = ({ setStep, numbers, setNumbers }) => {
         setTime("00:00:00");
         setLen(numbers.length);
       }
+    } else {
+      toast.error("Number Already added");
     }
   };
 

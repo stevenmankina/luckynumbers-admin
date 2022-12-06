@@ -14,10 +14,12 @@ import {
 
 
 const Dashboard = () => {
+
+
   return (
     <>
     <div className="p-2 md:p-6">
-      <Title title={'Dashboard'}/>
+      <Title title={'Dashboard'} />
 
       <div className="stats flex md:flex-row flex-col">
             {/* Graph  */}
@@ -94,7 +96,7 @@ const Dashboard = () => {
           <div className="stats2 mt-5 flex md:flex-row flex-col">
             <div className="md:w-1/2 mr-3">
               <h2 className="bg-primary-150 text-2xl p-5 text-left rounded-xl mb-2">
-                Show Current Stat
+              Show Statistics
               </h2>
 
               <div className="flex md:flex-row flex-col">

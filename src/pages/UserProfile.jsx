@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { toast } from "react-toastify";
 import { getDate, getDateInput } from "../util/age";
 import { BASE_URL } from "../util/config";
 
@@ -34,13 +35,15 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
       let res = await axios.post(url, data);
       if (res.status === 201) {
         getAllUsers();
-        console.log("User added sucessfully");
+        toast.success("User added sucessfully");
         setPopup(false);
-      } else {
-        console.log(res.data);
       }
     } catch (error) {
-      console.log(error);
+      if (error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Some Unknown Error Occured");
+      }
     }
   };
 
@@ -61,13 +64,16 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
       let res = await axios.patch(url, data);
       if (res.status === 201) {
         getAllUsers();
-        console.log("User Updated sucessfully");
+        toast.success("User Updated sucessfully");
         setPopup(false);
-      } else {
-        console.log(res.data);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
+      if (error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Some Unknown Error Occured");
+      }
     }
   };
 
@@ -75,7 +81,17 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
     <>
       {/* <Title title={'User Info'}/> */}
 
-      <div className="text-left w-full md:w-1/3  bg-white md:p-10 p-2">
+      <div className="text-left w-full md:w-1/3 relative bg-white md:p-10 p-2">
+        <p
+          onClick={() => {
+            setPopup(false);
+            setUser(null);
+          }}
+          className="text-2xl text-neutral-400 cursor-pointer absolute top-8 right-5"
+        >
+          X
+        </p>
+
         <h1 className="text-3xl font-bold">View Profile</h1>
         <p className="font-semibold">Sponsor photo</p>
 
@@ -196,15 +212,6 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
 
         <button className="px-3 py-1 mt-2 rounded text-white bg-primary-400">
           Delete Account
-        </button>
-        <button
-          onClick={() => {
-            setPopup(false);
-            setUser(null);
-          }}
-          className="px-3 py-1 mt-2 mx-3 rounded text-white bg-primary-400"
-        >
-          Cancel
         </button>
       </div>
     </>

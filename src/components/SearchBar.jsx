@@ -38,10 +38,9 @@ const SearchBar = ({searchUsers}) => {
               setSearchValue({ ...searchValue, age: e.target.value });
               setSearch(1)
             }}
-            className="border w-16 rounded border-primary-500 text-sm outline-none"
+            className="border w-16 px-0.5 rounded border-primary-500 text-sm outline-none"
             type="number"
-            name=""
-            id=""
+            min={0}
           />
         </div>
         <div className="flex md:flex-col justify-around md:w-fit w-full text-left mx-2 p-2">
@@ -52,7 +51,7 @@ const SearchBar = ({searchUsers}) => {
             setSearchValue({ ...searchValue, location: e.target.value });
             setSearch(2)
           }}
-            className="border w-32 rounded border-primary-500 text-sm outline-none"
+            className="border w-32 px-0.5 rounded border-primary-500 text-sm outline-none"
             type="text"
             name=""
             id=""
@@ -79,7 +78,7 @@ const SearchBar = ({searchUsers}) => {
         <MagnifyingGlass
           onClick={handleSearch}
           size={60}
-          className="ml-3 mt-3 md:mt-0 bg-primary-500 p-4 text-white rounded-full"
+          className="ml-3 mt-3 md:mt-0 cursor-pointer bg-primary-500 p-4 text-white rounded-full"
         />
       </div>
     </div>

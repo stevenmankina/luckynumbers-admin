@@ -12,14 +12,14 @@ const Title = ({ title }) => {
         <h1 className="text-3xl font-extralight ">{title}</h1>
 
         <img
-          onClick={() => setLogoutBtn(true)}
+          onClick={() => setLogoutBtn(!logoutBtn)}
           src="/H1.jpg"
-          className="rounded-full  w-10 h-10"
+          className="rounded-full cursor-pointer w-10 h-10"
           alt=""
         />
       </div>
       {logoutBtn && (
-        <div onClick={()=>{resetUser(); setLogoutBtn(false)}} className="absolute z-50 cursor-pointer bg-purple-50  p-2 rounded border right-10">
+        <div  onClick={()=>{resetUser(); setLogoutBtn(false)}} className="absolute z-50 cursor-pointer bg-purple-50  p-2 rounded border right-10">
           Logout
         </div>
       )}
