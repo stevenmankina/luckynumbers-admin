@@ -115,7 +115,7 @@ const Dashboard = () => {
                 </div>
 
                 <div className="stat-card p-3 md:w-1/3 my-1 md:mx-6 bg-warning-150 rounded-xl">
-                  <p className="text-left">Uses By Gender</p>
+                  <p className="text-left">Users By Gender</p>
                   <img src="/pie-chart.png" className="w-full" alt="" />
                 </div>
 
