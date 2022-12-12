@@ -1,5 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useContext } from "react";
+import { toast } from "react-toastify";
+import { AuthContext } from "../context/AuthContext";
 import SearchBar from "../components/SearchBar";
 import Title from "../components/Title";
 import { getAge, getDate } from "../util/age";
@@ -12,6 +15,8 @@ const UserInfo = () => {
   const [users, setUsers] = useState([]);
 
   const [user, setUser] = useState(null);
+
+  const { isLoggedIn, resetUser } = useContext(AuthContext);
 
   const searchUsers = async (search, searchValue) => {
     if (search === null || search === undefined) {
@@ -33,12 +38,18 @@ const UserInfo = () => {
       let res = await axios.get(url);
       if (res.status === 200) {
         setUsers(res.data.data);
-      } else {
-        console.log("Error");
       }
     } catch (error) {
       setUsers([]);
-      console.log(error);
+      let status = error.response.status;
+      if (status === 401 || status === 403) {
+        resetUser();
+        toast.error("You are not authenticated");
+      } else if (error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Some Unknown Error Occured");
+      }
     }
   };
 
@@ -49,11 +60,17 @@ const UserInfo = () => {
       let res = await axios.get(url);
       if (res.status === 200) {
         setUsers(res.data.data);
-      } else {
-        console.log(res.data.message);
       }
     } catch (error) {
-      console.log(error);
+      let status = error.response.status;
+      if (status === 401 || status === 403) {
+        resetUser();
+        toast.error("You are not authenticated");
+      } else if (error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Some Unknown Error Occured");
+      }
     }
   };
 

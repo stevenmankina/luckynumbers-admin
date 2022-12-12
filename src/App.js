@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { redirect } from "react-router-dom";
 import "./App.css";
-import { AuthContext, AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
 import Layout from "./pages/Layout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

@@ -2,10 +2,13 @@ import React from "react";
 
 const Step3 = ({ setStep, winning, setWinning, saveGame }) => {
 
-  const handleSave = async () => {
+  const handleSave = () => {
+     console.log();
+
     if(winning.win_at > 0  && winning.win_from > 0) { 
-      if(winning.win_at <= winning.win_from) {
-        await saveGame();
+      if(parseInt(winning.win_at) <= parseInt(winning.win_from)) {
+        console.log('Saving');
+       saveGame();
       }
     }
   }

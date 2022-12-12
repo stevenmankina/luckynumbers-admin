@@ -1,19 +1,57 @@
-import { Wrench } from "phosphor-react";
 import React, { useEffect, useState } from "react";
 import WinningNumbers from "./WinningNumbers";
+import axios from "axios";
+import { useContext } from "react";
+import { toast } from "react-toastify";
+import { AuthContext } from "../context/AuthContext";
+import { BASE_URL } from "../util/config";
+import { getDate, getTime } from "../util/age";
 
-const Step0 = ({ setStep }) => {
+const Step0 = ({ setStep, getAllGames, games }) => {
+  const { isLoggedIn, resetUser } = useContext(AuthContext);
+
   const [numbers, setNumbers] = useState([5, 8, 9, 7, 6]);
 
   const [popup, setPopup] = useState(false);
 
+
+  const deleteGame = async (gameId) => {
+
+    try {
+      let url = `${BASE_URL}/game/${gameId}/delete`
+
+      let res = await axios.delete(url);
+      if(res.status === 200) {
+        await getAllGames();
+        toast.success('Game Deleted Successfully');
+
+      }
+
+    } catch (error) {
+      let status = error.response.status;
+      if (status === 401 || status === 403) {
+        resetUser();
+        toast.error("You are not authenticated");
+      } else if (error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Some Unknown Error Occured");
+      }
+    }
+
+  }
+
+
+
+  useEffect(() => {
+    getAllGames();
+  }, []);
+
   return (
     <>
-
-    <div className="relative">
-      
-      {popup && <WinningNumbers numbers={numbers} setPopup={setPopup} />}
-    </div>
+      <div className="relative">
+        {popup && <WinningNumbers numbers={numbers} setPopup={setPopup} />}
+      </div>
 
       <div className="p-10">
         <h3 className="text-4xl pb-5 text-primary-500">Saved Episodes</h3>
@@ -34,22 +72,27 @@ const Step0 = ({ setStep }) => {
             </tr>
           </thead>
           <tbody>
-            <tr className="outline-1 outline-gray-200 outline rounded-sm ">
-              <th>
-                <input type="checkbox" name="single" id="" />
-              </th>
-              <td className="text-sm p-3 max-md:hidden">1</td>
-              <td className="text-sm max-md:hidden">21/11/22</td>
-              <td className="text-sm max-md:hidden">18:30</td>
-              <td
-                onClick={() => setPopup(true)}
-                className="text-base cursor-pointer text-primary-500 max-md:hidden"
+            {games.map((game, index) => (
+              <tr
+                key={game._id}
+                className="outline-1 outline-gray-200 outline rounded-sm "
               >
-                view
-              </td>
-              {/* <td className="text-sm max-md:hidden"> <Wrench className="m-auto" size={20} /> </td> */}
-              <td className="text-sm max-md:hidden"> X</td>
-            </tr>
+                <th>
+                  <input type="checkbox" name="single" id="" />
+                </th>
+                <td className="text-sm p-3 max-md:hidden">{index + 1}</td>
+                <td className="text-sm max-md:hidden">{getDate(game.starts_at)}</td>
+                <td className="text-sm max-md:hidden">{getTime(game.starts_at)}</td>
+                <td
+                  onClick={() => {setPopup(true); setNumbers(game.win_array)}}
+                  className="text-base cursor-pointer text-primary-500 max-md:hidden"
+                >
+                  view
+                </td>
+                {/* <td className="text-sm max-md:hidden"> <Wrench className="m-auto" size={20} /> </td> */}
+                <td  className="text-sm  max-md:hidden"> <p className="cursor-pointer w-fit m-auto" onClick={()=>deleteGame(game._id)}> X</p> </td>
+              </tr>
+            ))}
           </tbody>
         </table>
 

@@ -1,10 +1,14 @@
 import axios from "axios";
 import React from "react";
+import { useContext } from "react";
 import { toast } from "react-toastify";
+import { AuthContext } from "../context/AuthContext";
 import { getDate, getDateInput } from "../util/age";
 import { BASE_URL } from "../util/config";
 
 const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
+  const { isLoggedIn, resetUser } = useContext(AuthContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(e);
@@ -39,7 +43,11 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
         setPopup(false);
       }
     } catch (error) {
-      if (error.response.data.message) {
+      let status = error.response.status;
+      if (status === 401 || status === 403) {
+        toast.error("You are not authenticated");
+        resetUser();
+      } else if (error.response.data.message) {
         toast.error(error.response.data.message);
       } else {
         toast.error("Some Unknown Error Occured");
@@ -68,8 +76,34 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
         setPopup(false);
       }
     } catch (error) {
-      console.log(error.response);
-      if (error.response.data.message) {
+      let status = error.response.status;
+      if (status === 401 || status === 403) {
+        resetUser();
+        toast.error("You are not authenticated");
+      } else if (error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Some Unknown Error Occured");
+      }
+    }
+  };
+
+  const deleteUser = async () => {
+    let url = `${BASE_URL}/player/${user._id}/delete`;
+
+    try {
+      let res = await axios.delete(url);
+      if (res.status === 200) {
+        getAllUsers();
+        toast.success("User Deleted sucessfully");
+        setPopup(false);
+      }
+    } catch (error) {
+      let status = error.response.status;
+      if (status === 401 || status === 403) {
+        resetUser();
+        toast.error("You are not authenticated");
+      } else if (error.response.data.message) {
         toast.error(error.response.data.message);
       } else {
         toast.error("Some Unknown Error Occured");
@@ -210,7 +244,7 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
           />
         </form>
 
-        <button className="px-3 py-1 mt-2 rounded text-white bg-primary-400">
+        <button onClick={deleteUser} className="px-3 py-1 mt-2 rounded text-white bg-primary-400">
           Delete Account
         </button>
       </div>

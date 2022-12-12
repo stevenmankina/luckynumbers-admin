@@ -8,7 +8,7 @@ export const AuthProvider = ({children}) => {
 
     const resetUser = () => {
         localStorage.removeItem('userToken');
-        setUserToken(null)
+        setUserToken(null);
     }
 
     const isLoggedIn = async () => {
