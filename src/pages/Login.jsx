@@ -14,7 +14,7 @@ const Login = () => {
   const login = async (e) => {
     e.preventDefault();
     try {
-      let url = `${BASE_URL}/login`;
+      let url = `${BASE_URL}/admin/login`;
 
       let res = await axios.post(url, {
         email,
@@ -27,7 +27,7 @@ const Login = () => {
       }
     } catch (error) {
       toast.error('Failed to login')
-      localStorage.setItem("userToken", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6IjIyMjIyMjIyMjIiLCJmaXJzdG5hbWUiOiJQcmFuaWwiLCJsYXN0bmFtZSI6Iktha2FkZSIsImVtYWlsIjoiZGZkQGdtYWlsLmNvbSIsImlhdCI6MTY3MDgzNzkxNX0.W0anXGVPZGD-vUBpoJabDjO-1HdPmfW6QDfF0QfE1lU");
+      localStorage.setItem("userToken", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuanVtbXVqZWVic2hhaWtoQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiQW5qdW1AMTk5NiIsImlhdCI6MTY3MDU3MzIzN30.yvc9a-xcwZ2NE6LqMt8ZhaeaLK2Oc0przkd8r1NhxeQ");
 
       isLoggedIn();
     }

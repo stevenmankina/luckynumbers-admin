@@ -11,12 +11,13 @@ import axios from "axios";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
-import { timeInMilliseconds } from "../util/age";
+import { getSeconds, timeInMilliseconds } from "../util/age";
 
 const LuckyNumbers = () => {
   const [step, setStep] = useState(0);
   const [datetime, setDatetime] = useState(null);
   const [numbers, setNumbers] = useState([]);
+  const [duration, setDuration] = useState(null);
 
   const { isLoggedIn, resetUser } = useContext(AuthContext);
 
@@ -47,13 +48,13 @@ const LuckyNumbers = () => {
 
 
   const saveGame = async () => {
-    let win_numbers = [];
+    let win_array = [];
     let time_array = [];
 
     for (let i = 0; i < numbers.length; i++) {
       let numberObj = numbers[i];
-      win_numbers.push(numberObj.number);
-      let time = timeInMilliseconds(numberObj.time);
+      win_array.push(parseInt(numberObj.number));
+      let time = getSeconds(numberObj.time);
       time_array.push(time);
     }
 
@@ -61,10 +62,10 @@ const LuckyNumbers = () => {
 
     let data = {
       starts_at: datetime,
-      win_in: winning.win_at,
-      win_from: winning.win_from,
-      win_array: win_numbers,
-      win_numbers,
+      win_in: parseInt(winning.win_at),
+      win_from: parseInt(winning.win_from),
+      duration,
+      win_array,
       time_array,
     };
 
@@ -106,6 +107,8 @@ const LuckyNumbers = () => {
             setStep={setStep}
             setDatetime={setDatetime}
             datetime={datetime}
+            duration={duration}
+            setDuration={setDuration}
           />
         ) : null}
         {step === 2 ? (

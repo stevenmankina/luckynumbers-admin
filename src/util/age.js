@@ -39,3 +39,9 @@ export const timeInMilliseconds = (t) => {
 
   return Date.parse(str);
 };
+
+export const getSeconds = (time) => {
+  let timeArr = time.split(':');
+
+  return parseInt(timeArr[0])*60*60 + parseInt(timeArr[1])*60 + parseInt(timeArr[2]);
+}
