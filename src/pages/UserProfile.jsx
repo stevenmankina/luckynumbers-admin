@@ -7,7 +7,7 @@ import { getDate, getDateInput } from "../util/age";
 import { BASE_URL } from "../util/config";
 
 const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
-  const { isLoggedIn, resetUser } = useContext(AuthContext);
+  const { isLoggedIn, resetUser, userToken } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,7 +36,11 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
     };
 
     try {
-      let res = await axios.post(url, data);
+      let res = await axios.post(url, data, {
+        headers: {
+          Authorization: "Bearer " + userToken,
+        }
+      });
       if (res.status === 201) {
         getAllUsers();
         toast.success("User added sucessfully");
@@ -69,7 +73,11 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
     };
 
     try {
-      let res = await axios.patch(url, data);
+      let res = await axios.patch(url, data, {
+        headers: {
+          Authorization: "Bearer " + userToken,
+        }
+      });
       if (res.status === 201) {
         getAllUsers();
         toast.success("User Updated sucessfully");
@@ -92,7 +100,11 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
     let url = `${BASE_URL}/player/${user._id}/delete`;
 
     try {
-      let res = await axios.delete(url);
+      let res = await axios.delete(url, {
+        headers: {
+          Authorization: "Bearer " + userToken,
+        }
+      });
       if (res.status === 200) {
         getAllUsers();
         toast.success("User Deleted sucessfully");

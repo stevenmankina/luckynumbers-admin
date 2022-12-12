@@ -19,7 +19,7 @@ const LuckyNumbers = () => {
   const [numbers, setNumbers] = useState([]);
   const [duration, setDuration] = useState(null);
 
-  const { isLoggedIn, resetUser } = useContext(AuthContext);
+  const { isLoggedIn, resetUser, userToken } = useContext(AuthContext);
 
   const [winning, setWinning] = useState({ win_at: 0, win_from: 0 });
 
@@ -29,7 +29,11 @@ const LuckyNumbers = () => {
     try {
       let url = `${BASE_URL}/game`;
 
-      let res = await axios.get(url);
+      let res = await axios.get(url, {
+        headers: {
+          Authorization: "Bearer " + userToken,
+        }
+      });
       if (res.status === 200) {
         setGames(res.data.data);
       }
@@ -72,7 +76,11 @@ const LuckyNumbers = () => {
     console.log(data);
 
     try {
-      let res = await axios.post(url, data);
+      let res = await axios.post(url, data, {
+        headers: {
+          Authorization: "Bearer " + userToken,
+        }
+      });
 
       if (res.status === 201) {
         setStep(4);

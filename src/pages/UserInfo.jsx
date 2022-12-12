@@ -16,7 +16,7 @@ const UserInfo = () => {
 
   const [user, setUser] = useState(null);
 
-  const { isLoggedIn, resetUser } = useContext(AuthContext);
+  const { isLoggedIn, resetUser, userToken } = useContext(AuthContext);
 
   const searchUsers = async (search, searchValue) => {
     if (search === null || search === undefined) {
@@ -35,7 +35,11 @@ const UserInfo = () => {
     // console.log(url);
 
     try {
-      let res = await axios.get(url);
+      let res = await axios.get(url, {
+        headers: {
+          Authorization: "Bearer " + userToken,
+        }
+      });
       if (res.status === 200) {
         setUsers(res.data.data);
       }
@@ -57,7 +61,11 @@ const UserInfo = () => {
     let url = `${BASE_URL}/user/searchAll`;
 
     try {
-      let res = await axios.get(url);
+      let res = await axios.get(url, {
+        headers: {
+          Authorization: "Bearer " + userToken,
+        }
+      });
       if (res.status === 200) {
         setUsers(res.data.data);
       }

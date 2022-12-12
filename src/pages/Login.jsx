@@ -21,13 +21,12 @@ const Login = () => {
         password,
       });
       if (res.status === 200) {
-        localStorage.setItem("userToken", res.data.jwt);
+        localStorage.setItem("userToken", res.data.token);
         isLoggedIn();
         console.log("logged in successfully");
       }
     } catch (error) {
-      toast.error('Failed to login')
-      localStorage.setItem("userToken", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuanVtbXVqZWVic2hhaWtoQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiQW5qdW1AMTk5NiIsImlhdCI6MTY3MDU3MzIzN30.yvc9a-xcwZ2NE6LqMt8ZhaeaLK2Oc0przkd8r1NhxeQ");
+      toast.error('Failed to login');
 
       isLoggedIn();
     }
