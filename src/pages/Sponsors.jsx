@@ -6,7 +6,7 @@ import Title from '../components/Title'
 const Sponsors = () => {
   const [popup, setPopup] = useState(false)
 
-
+  const [sponsor, setSponsor] = useState(null);
 
   return (
     <>
@@ -14,7 +14,9 @@ const Sponsors = () => {
       
       <Title title={'Sponsors and Adverts'} />
 
-    {popup ? <AddSponsors setPopup={setPopup} /> : <SponsorsList setPopup={setPopup}/>}
+    {popup ?
+    <AddSponsors setPopup={setPopup} setSponsor={setSponsor} sponsor={sponsor} /> : 
+    <SponsorsList setSponsor={setSponsor} setPopup={setPopup}/>}
 
 
     </div>
