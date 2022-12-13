@@ -113,7 +113,7 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
         },
       });
 
-      if (res.status === 201) {
+      if (res.status === 200) {
         setPopup(false);
         toast.success("Sponsor Updated Successfully");
       }
