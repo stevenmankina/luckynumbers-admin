@@ -140,7 +140,7 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
         },
       });
 
-      if (res.status === 201) {
+      if (res.status === 200) {
         setPopup(false);
         toast.success("Sponsor Deleted Successfully");
       }
@@ -170,7 +170,7 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
           <h1 className="text-3xl font-bold">Sponsor Profile</h1>
 
           <button
-            onClick={() => setPopup(false)}
+            onClick={() => {setPopup(false); setSponsor(null);}}
             className="px-3  py-1 rounded cursor-pointer my-3 text-white bg-primary-500"
           >
             Back
@@ -339,7 +339,7 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
             </div>
             <div className=" flex w-full flex-wrap  ">
               {sponsor?.noOfAdverts.map((id) => (
-                <Advert key={id} sid={sponsor?._id} id={id} />
+                <Advert key={id} sid={sponsor?._id} id={id} getSponsor={getSponsor} />
               ))}
             </div>
                 </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { getSeconds } from "../util/age";
 
 const Step2 = ({ setStep, numbers, setNumbers }) => {
   const [number, setNumber] = useState(null);
@@ -10,19 +11,41 @@ const Step2 = ({ setStep, numbers, setNumbers }) => {
   const [len, setLen] = useState(0);
 
   const handleAddNo = () => {
-    console.log(numbers.filter((e) => e.number === number).length);
+    // console.log(numbers.filter((e) => e.number === number).length);
 
     if (number != null && number !== "" && time != null) {
       if (numbers.filter((e) => e.number === number).length === 0) {
-        let arr = numbers;
-        arr.push({ number, time });
-        setNumbers(arr);
-        setNumber(null);
-        setTime("00:00:00");
-        setLen(numbers.length);
+
+        if(numbers.length === 0 ) {
+          let arr = numbers;
+          arr.push({ number, time });
+          setNumbers(arr);
+          setNumber(null);
+          setTime("00:00:00");
+          setLen(numbers.length);
+          return;
+        } 
+        let prevTime = numbers[numbers.length - 1].time;
+
+        let prevSec = getSeconds(prevTime);
+        let currSec = getSeconds(time);
+
+        if(prevSec < currSec) {
+          let arr = numbers;
+          arr.push({ number, time });
+          setNumbers(arr);
+          setNumber(null);
+          setTime("00:00:00");
+          setLen(numbers.length);
+        } else {
+          toast.error("Time Should be greater than previous number time");
+        }
+        
+      } else {
+        toast.error("Number Already added");
       }
     } else {
-      toast.error("Number Already added");
+      toast.error("Invalid Number");
     }
   };
 
@@ -36,15 +59,14 @@ const Step2 = ({ setStep, numbers, setNumbers }) => {
   };
 
   const handleContinue = () => {
-    if(len >= 15) {
+    if (len >= 15) {
       setStep(3);
     }
-  }
+  };
 
   useEffect(() => {
     setLen(numbers.length);
-  }, [numbers.length])
-  
+  }, [numbers.length]);
 
   return (
     <>
@@ -62,7 +84,9 @@ const Step2 = ({ setStep, numbers, setNumbers }) => {
 
         <button
           onClick={handleContinue}
-          className={`px-10 bg-primary-500 py-2 my-3 ${len < 15 ? 'bg-primary-150 text-primary-500' : ''} text-white`}
+          className={`px-10 bg-primary-500 py-2 my-3 ${
+            len < 15 ? "bg-primary-150 text-primary-500" : ""
+          } text-white`}
         >
           CONTINUE &gt;{" "}
         </button>

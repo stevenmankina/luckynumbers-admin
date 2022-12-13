@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
 
-const Advert = ({ sid, id }) => {
+const Advert = ({ sid, id, getSponsor }) => {
   const [advert, setAdvert] = useState(null);
 
   const { resetUser, userToken } = useContext(AuthContext);
@@ -51,6 +51,7 @@ const Advert = ({ sid, id }) => {
 
       if (res.status === 200) {
         setAdvert(res.data.data);
+        getSponsor();
         toast.success("Advert Deleted Successfully");
       }
     } catch (error) {
