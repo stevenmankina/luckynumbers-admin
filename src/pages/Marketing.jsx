@@ -37,11 +37,6 @@ const Marketing = () => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log(text);
-  // }, [text])
-  
-
   return (
     <>
       <div className="p-2 md:p-6 text-left">
