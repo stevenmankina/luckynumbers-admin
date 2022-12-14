@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../util/config";
 import { getDate, getTime } from "../util/age";
+import EditTimestamp from "./EditTimestamp";
 
 const Step0 = ({ setStep, getAllGames, games }) => {
   const { isLoggedIn, resetUser } = useContext(AuthContext);
@@ -14,19 +15,19 @@ const Step0 = ({ setStep, getAllGames, games }) => {
 
   const [popup, setPopup] = useState(false);
 
+  const [game, setGame] = useState(null);
+
+  const [timePopup, setTimePopup] = useState(false);
 
   const deleteGame = async (gameId) => {
-
     try {
-      let url = `${BASE_URL}/game/${gameId}/delete`
+      let url = `${BASE_URL}/game/${gameId}/delete`;
 
       let res = await axios.delete(url);
-      if(res.status === 200) {
+      if (res.status === 200) {
         await getAllGames();
-        toast.success('Game Deleted Successfully');
-
+        toast.success("Game Deleted Successfully");
       }
-
     } catch (error) {
       let status = error.response.status;
       if (status === 401 || status === 403) {
@@ -38,10 +39,7 @@ const Step0 = ({ setStep, getAllGames, games }) => {
         toast.error("Some Unknown Error Occured");
       }
     }
-
-  }
-
-
+  };
 
   useEffect(() => {
     getAllGames();
@@ -51,6 +49,9 @@ const Step0 = ({ setStep, getAllGames, games }) => {
     <>
       <div className="relative">
         {popup && <WinningNumbers numbers={numbers} setPopup={setPopup} />}
+      </div>
+      <div className="relative">
+        {timePopup && <EditTimestamp setTimePopup={setTimePopup} game={game} getAllGames={getAllGames} />}
       </div>
 
       <div className="p-10">
@@ -81,16 +82,44 @@ const Step0 = ({ setStep, getAllGames, games }) => {
                   <input type="checkbox" name="single" id="" />
                 </th>
                 <td className="text-sm p-3 max-md:hidden">{index + 1}</td>
-                <td className="text-sm max-md:hidden">{getDate(game.starts_at)}</td>
-                <td className="text-sm max-md:hidden">{getTime(game.starts_at)}</td>
                 <td
-                  onClick={() => {setPopup(true); setNumbers(game.win_array)}}
+                  onClick={() => {
+                    setGame(game);
+                    setTimePopup(true);
+                  }}
+                  className="text-sm cursor-pointer text-primary-500 max-md:hidden"
+                >
+                  {getDate(game.starts_at)}
+                </td>
+                <td
+                  onClick={() => {
+                    setGame(game);
+                    setTimePopup(true);
+                  }}
+                  className="text-sm cursor-pointer text-primary-500 max-md:hidden"
+                >
+                  {getTime(game.starts_at)}
+                </td>
+                <td
+                  onClick={() => {
+                    setPopup(true);
+                    setNumbers(game.win_array);
+                  }}
                   className="text-base cursor-pointer text-primary-500 max-md:hidden"
                 >
                   view
                 </td>
                 {/* <td className="text-sm max-md:hidden"> <Wrench className="m-auto" size={20} /> </td> */}
-                <td  className="text-sm  max-md:hidden"> <p className="cursor-pointer w-fit m-auto" onClick={()=>deleteGame(game._id)}> X</p> </td>
+                <td className="text-sm  max-md:hidden">
+                  {" "}
+                  <p
+                    className="cursor-pointer w-fit m-auto"
+                    onClick={() => deleteGame(game._id)}
+                  >
+                    {" "}
+                    X
+                  </p>{" "}
+                </td>
               </tr>
             ))}
           </tbody>

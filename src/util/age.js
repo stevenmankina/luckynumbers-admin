@@ -6,18 +6,13 @@ export const getAge = (dob) => {
 };
 
 export const getDate = (timestamp) => {
-  let day = new Date(timestamp).getDate();
-  let month = new Date(timestamp).getMonth();
-  let year = new Date(timestamp).getFullYear();
+  
+  return timestamp.slice(0, 10);
 
-  return `${day}-${month}-${year}`;
 };
 
 export const getTime = (timestamp) => {
-  let hours = new Date(timestamp).getHours();
-  let minutes = new Date(timestamp).getMinutes();
-
-  return `${hours}:${minutes}`;
+  return timestamp.slice(11, 16);
 };
 
 export const getDateInput = (timestamp) => {

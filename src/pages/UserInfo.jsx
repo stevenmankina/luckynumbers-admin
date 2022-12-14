@@ -27,7 +27,7 @@ const UserInfo = () => {
     if (search === 1) {
       url = `${BASE_URL}/user/age?value=${searchValue.age}`;
     } else if (search === 2) {
-      url = `${BASE_URL}/user/location?value=${searchValue.location}`;
+      url = `${BASE_URL}/user/country?value=${searchValue.location}`;
     } else if (search === 3) {
       url = `${BASE_URL}/user/gender?value=${searchValue.gender ? searchValue.gender : 'Male'}`;
     }

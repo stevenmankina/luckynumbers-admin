@@ -17,15 +17,21 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
         let currSec = getSeconds(time);
         let durationSec = getSeconds(duration);
 
-        if (numbers.length === 0 && currSec < durationSec) {
-          let arr = numbers;
-          arr.push({ number, time });
-          setNumbers(arr);
-          setNumber(null);
-          setTime("00:00:00");
-          setLen(numbers.length);
-          return;
+        if (numbers.length === 0) {
+          if(currSec < durationSec) {
+
+            let arr = numbers;
+            arr.push({ number, time });
+            setNumbers(arr);
+            setNumber(null);
+            setTime("00:00:00");
+            setLen(numbers.length);
+            return;
+          } else {
+            toast.error("time should be less than duration");
+          }
         }
+
 
         let prevTime = numbers[numbers.length - 1].time;
 
