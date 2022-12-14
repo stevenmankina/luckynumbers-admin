@@ -237,14 +237,14 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
               placeholder="email"
               name="email"
             />
-
+{/* 
             <p className="font-semibold mt-3">Live Adverts</p>
             <input
               type="text"
               className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
               placeholder="Number of Adverts"
               name="liveadverts"
-            />
+            /> */}
 
             {/* <p className="font-semibold mt-3">Wallet on account</p>
             <input

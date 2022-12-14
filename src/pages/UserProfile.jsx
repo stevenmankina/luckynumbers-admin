@@ -31,7 +31,7 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
       lastname: user.lastname,
       email: user.email,
       dob: user.dob,
-      gender: user.gender,
+      gender: user.gender ? user.gender : 'Male',
       location: user.location,
     };
 
@@ -43,6 +43,7 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
       });
       if (res.status === 201) {
         getAllUsers();
+        setUser(null);
         toast.success("User added sucessfully");
         setPopup(false);
       }
@@ -80,6 +81,7 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
       });
       if (res.status === 201) {
         getAllUsers();
+        setUser(null);
         toast.success("User Updated sucessfully");
         setPopup(false);
       }
@@ -107,6 +109,7 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
       });
       if (res.status === 200) {
         getAllUsers();
+        setUser(null);
         toast.success("User Deleted sucessfully");
         setPopup(false);
       }
@@ -232,6 +235,8 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
           <select
             onChange={(e) => {
               setUser({ ...user, gender: e.target.value });
+              console.log(e.target.value);
+              console.log(user.gender);
             }}
             value={user ? user.gender : "Male"}
             className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
