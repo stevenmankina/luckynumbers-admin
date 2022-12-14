@@ -16,7 +16,7 @@ const UserInfo = () => {
 
   const [user, setUser] = useState(null);
 
-  const { isLoggedIn, resetUser, userToken } = useContext(AuthContext);
+  const { resetUser, userToken } = useContext(AuthContext);
 
   const searchUsers = async (search, searchValue) => {
     if (search === null || search === undefined) {
@@ -29,10 +29,10 @@ const UserInfo = () => {
     } else if (search === 2) {
       url = `${BASE_URL}/user/location?value=${searchValue.location}`;
     } else if (search === 3) {
-      url = `${BASE_URL}/user/gender?value=${searchValue.gender}`;
+      url = `${BASE_URL}/user/gender?value=${searchValue.gender ? searchValue.gender : 'Male'}`;
     }
 
-    // console.log(url);
+    console.log(url);
 
     try {
       let res = await axios.get(url, {
@@ -105,27 +105,27 @@ const UserInfo = () => {
         <SearchBar searchUsers={searchUsers} />
 
         <div className="p-7">
-          <button
+          {/* <button
             onClick={() => setPopup(true)}
             className="px-3 py-1 rounded text-white bg-primary-500"
           >
             Add User
-          </button>
+          </button> */}
         </div>
 
         <table className="md:table-auto w-11/12 ">
           <thead className="bg-neutral-100">
-            <tr className="font-thin uppercase outline-1 outline-gray-200 outline rounded-sm">
+            <tr className="font-thin uppercase outline-1  outline-gray-200 outline rounded-sm">
               <th className="p-3">
                 <input type="checkbox" name="allCheck" id="" />
               </th>
-              <th className="p-3 font-normal">Name</th>
+              <th className="p-3 text-left font-normal">Name</th>
               <th className="p-3 max-md:hidden font-normal">Location</th>
               <th className="p-3 max-md:hidden font-normal">Email</th>
               <th className="p-3 max-md:hidden font-normal">Age</th>
               <th className="p-3 max-md:hidden font-normal">Account Created</th>
-              <th className="p-3 max-md:hidden font-normal">Coins Held</th>
-              <th className="p-3  font-normal">Active</th>
+              {/* <th className="p-3 max-md:hidden font-normal">Coins Held</th>
+              <th className="p-3  font-normal">Active</th> */}
             </tr>
           </thead>
           <tbody>
@@ -163,10 +163,10 @@ const UserInfo = () => {
                   <td className="text-sm max-md:hidden">
                     {getDate(user.created_at)}
                   </td>
-                  <td className="text-sm max-md:hidden">100</td>
+                  {/* <td className="text-sm max-md:hidden">100</td>
                   <td>
                     <input type="checkbox" name="active" id="" />
-                  </td>
+                  </td> */}
                 </tr>
               ))}
           </tbody>

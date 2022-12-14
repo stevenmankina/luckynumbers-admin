@@ -120,7 +120,7 @@ const LuckyNumbers = () => {
           />
         ) : null}
         {step === 2 ? (
-          <Step2 setStep={setStep} numbers={numbers} setNumbers={setNumbers} />
+          <Step2 setStep={setStep} numbers={numbers} duration={duration} setNumbers={setNumbers} />
         ) : null}
         {step === 3 ? (
           <Step3

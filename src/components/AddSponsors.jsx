@@ -114,7 +114,7 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
       });
 
       if (res.status === 200) {
-        setPopup(false);
+        // setPopup(false);
         toast.success("Sponsor Updated Successfully");
       }
     } catch (error) {
@@ -315,9 +315,9 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
             </div>
             <button
               onClick={deleteSponsor}
-              className={`px-3 py-1 mt-2 ${
+              className={`${
                 sponsor && sponsor._id ? "" : "hidden"
-              } rounded text-white float-right bg-primary-400`}
+              } px-4 py-1 my-3 float-right  border-2 rounded text-primary-500 border-primary-500`}
             >
               Remove Sponsor
             </button>
@@ -345,7 +345,6 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
                 </div>
           </>
         )}
-        {/* <Advert/> */}
       </div>
     </>
   );

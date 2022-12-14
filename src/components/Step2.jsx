@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { getSeconds } from "../util/age";
 
-const Step2 = ({ setStep, numbers, setNumbers }) => {
+const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
   const [number, setNumber] = useState(null);
   const [time, setTime] = useState("00:00:00");
 
@@ -11,12 +11,13 @@ const Step2 = ({ setStep, numbers, setNumbers }) => {
   const [len, setLen] = useState(0);
 
   const handleAddNo = () => {
-    // console.log(numbers.filter((e) => e.number === number).length);
-
     if (number != null && number !== "" && time != null) {
       if (numbers.filter((e) => e.number === number).length === 0) {
+        
+        let currSec = getSeconds(time);
+        let durationSec = getSeconds(duration);
 
-        if(numbers.length === 0 ) {
+        if (numbers.length === 0 && currSec < durationSec) {
           let arr = numbers;
           arr.push({ number, time });
           setNumbers(arr);
@@ -24,23 +25,27 @@ const Step2 = ({ setStep, numbers, setNumbers }) => {
           setTime("00:00:00");
           setLen(numbers.length);
           return;
-        } 
+        }
+
         let prevTime = numbers[numbers.length - 1].time;
 
         let prevSec = getSeconds(prevTime);
-        let currSec = getSeconds(time);
 
-        if(prevSec < currSec) {
-          let arr = numbers;
-          arr.push({ number, time });
-          setNumbers(arr);
-          setNumber(null);
-          setTime("00:00:00");
-          setLen(numbers.length);
+
+        if (prevSec < currSec) {
+          if (currSec < durationSec) {
+            let arr = numbers;
+            arr.push({ number, time });
+            setNumbers(arr);
+            setNumber(null);
+            setTime("00:00:00");
+            setLen(numbers.length);
+          } else {
+            toast.error("time should be less than duration");
+          }
         } else {
           toast.error("Time Should be greater than previous number time");
         }
-        
       } else {
         toast.error("Number Already added");
       }

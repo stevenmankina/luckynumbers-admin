@@ -254,14 +254,14 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
             rows="2"
           ></textarea> */}
 
-          <input
+          {/* <input
             type="submit"
-            className="px-3 mt-5 py-1 rounded text-white bg-primary-500"
+            className="px-3 mt-5 py-1 rounded cursor-pointer text-white bg-primary-500"
             value="Save Profile"
-          />
+          /> */}
         </form>
 
-        <button onClick={deleteUser} className="px-3 py-1 mt-2 rounded text-white bg-primary-400">
+        <button onClick={deleteUser} className="px-4 py-1 my-5 border-2 rounded text-primary-500 border-primary-500">
           Delete Account
         </button>
       </div>

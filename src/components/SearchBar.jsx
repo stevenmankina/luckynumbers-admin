@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MagnifyingGlass } from "phosphor-react";
 
 const SearchBar = ({searchUsers}) => {
-  const [search, setSearch] = useState(null);
+  const [search, setSearch] = useState(3);
 
   const [searchValue, setSearchValue] = useState({
     age: 0,
