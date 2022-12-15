@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { getDate, getTime } from "../util/age";
+import { formatDateTime, getDate, getTime } from "../util/age";
 import { BASE_URL } from "../util/config";
 import { useContext } from "react";
 import { toast } from "react-toastify";
@@ -24,6 +24,7 @@ const Advert = ({ sid, id, getSponsor }) => {
       });
 
       if (res.status === 200) {
+        console.log(res.data.data);
         setAdvert(res.data.data);
         console.log(res.data.data)
       }
@@ -50,7 +51,7 @@ const Advert = ({ sid, id, getSponsor }) => {
       });
 
       if (res.status === 200) {
-        setAdvert(res.data.data);
+        // setAdvert(res.data.data);
         getSponsor();
         toast.success("Advert Deleted Successfully");
       }
@@ -81,12 +82,12 @@ const Advert = ({ sid, id, getSponsor }) => {
 
           <p className="text-left mt-3 font-semibold">Start At</p>
           <p className="bg-white px-2 py-1 rounded-md border text-left mt-1 w-full">
-            {getDate(advert?.startAt)} - {getTime(advert?.startAt)}
+             { formatDateTime(advert?.startAt) }
           </p>
 
           <p className="text-left mt-3 font-semibold">Ends At</p>
           <p className="bg-white px-2 py-1 rounded-md border text-left mt-1 w-full">
-            {getDate(advert?.duration)} - {getTime(advert?.duration)}
+            {formatDateTime(advert?.duration)}
           </p>
 
           <button onClick={deleteAdvert} className="px-3 mx-3 mt-5 py-1 rounded cursor-pointer text-white bg-primary-500">

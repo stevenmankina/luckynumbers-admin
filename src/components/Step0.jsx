@@ -47,6 +47,7 @@ const Step0 = ({ setStep, getAllGames, games }) => {
 
   return (
     <>
+    
       <div className="relative">
         {popup && <WinningNumbers numbers={numbers} setPopup={setPopup} />}
       </div>

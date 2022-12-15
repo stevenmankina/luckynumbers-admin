@@ -6,16 +6,24 @@ export const getAge = (dob) => {
 };
 
 export const getDate = (timestamp) => {
-  
+  // console.log(timestamp);
+  if(timestamp === undefined) return;
+
   return timestamp.slice(0, 10);
 
 };
 
 export const getTime = (timestamp) => {
+  // console.log(timestamp);
+  if(timestamp === undefined) return;
+
   return timestamp.slice(11, 16);
 };
 
 export const getDateInput = (timestamp) => {
+
+  if(timestamp === undefined) return;
+
   let day = new Date(timestamp).getDate();
   if (day < 10) {
     day = `0${day}`;
@@ -39,4 +47,16 @@ export const getSeconds = (time) => {
   let timeArr = time.split(':');
 
   return parseInt(timeArr[0])*60*60 + parseInt(timeArr[1])*60 + parseInt(timeArr[2]);
+}
+
+
+export const formatDateTime = (timestamp) => {
+
+  if(timestamp === undefined) return;
+  
+  let date = timestamp.slice(0, 10);
+  let time = timestamp.slice(11, 16)
+  
+  return `${date} - ${time}` ;
+
 }

@@ -77,7 +77,7 @@ const EditTimestamp = ({ setTimePopup, game, getAllGames }) => {
           onClick={updateGame}
             className="px-3 mx-3 mt-5 py-1 rounded cursor-pointer text-white bg-primary-500"
           >
-            Edit Time
+            Save
           </button>
         </div>
       </div>
