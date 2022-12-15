@@ -44,7 +44,7 @@ const SearchBar = ({searchUsers}) => {
           />
         </div>
         <div className="flex md:flex-col justify-around md:w-fit w-full text-left mx-2 p-2">
-          <p className="font-semibold">Location</p>
+          <p className="font-semibold">Country</p>
           <input
           value={searchValue.location}
           onChange={(e) =>{

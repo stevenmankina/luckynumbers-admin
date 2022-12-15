@@ -309,7 +309,7 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
 
               <input
                 type="submit"
-                className="px-3 py-1 rounded text-white bg-primary-500"
+                className="px-3 py-1 rounded cursor-pointer text-white bg-primary-500"
                 value="Save Sponsor"
               />
             </div>

@@ -51,12 +51,12 @@ const SponsorsList = ({ setPopup, setSponsor }) => {
             <th className="p-3">
               <input type="checkbox" name="allCheck" id="" />
             </th>
-            <th className="p-3 font-normal">Sponsor Name</th>
+            <th className="p-3 text-left font-normal">Sponsor Name</th>
             <th className="p-3 max-md:hidden font-normal">Contact Name</th>
             <th className="p-3 max-md:hidden font-normal">Email</th>
             <th className="p-3 max-md:hidden font-normal">No. Live Adverts</th>
             <th className="p-3 max-md:hidden font-normal">Edit</th>
-            <th className="p-3  font-normal">Active</th>
+            <th className="p-3 font-normal">Active</th>
           </tr>
         </thead>
         <tbody>
@@ -69,7 +69,7 @@ const SponsorsList = ({ setPopup, setSponsor }) => {
                 <input type="checkbox" name="single" />
               </th>
               <td className="p-3 flex">
-                <img src="/logo192.png" className="w-10 h-10 mr-2" alt="" />
+                {/* <img src="/logo192.png" className="w-10 h-10 mr-2" alt="" /> */}
                 <div className="text-left">
                   <p className="font-semibold text-sm">{sponsor.sponsorName}</p>
                   <p className="font-light text-xs">{sponsor.phone}</p>

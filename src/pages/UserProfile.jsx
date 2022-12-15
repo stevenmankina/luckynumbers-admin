@@ -208,15 +208,15 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
             required={true}
           />
 
-          <p className="font-semibold mt-3">Location</p>
+          <p className="font-semibold mt-3">Country</p>
           <input
             type="text"
-            value={user ? user.location : ""}
+            value={user ? user.country : ""}
             className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
             placeholder="Your Location"
             name="location"
             onChange={(e) => {
-              setUser({ ...user, location: e.target.value });
+              setUser({ ...user, country: e.target.value });
             }}
           />
           <p className="font-semibold mt-3">Date Of Birth</p>

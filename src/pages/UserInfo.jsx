@@ -120,7 +120,7 @@ const UserInfo = () => {
                 <input type="checkbox" name="allCheck" id="" />
               </th>
               <th className="p-3 text-left font-normal">Name</th>
-              <th className="p-3 max-md:hidden font-normal">Location</th>
+              <th className="p-3 max-md:hidden font-normal">Country</th>
               <th className="p-3 max-md:hidden font-normal">Email</th>
               <th className="p-3 max-md:hidden font-normal">Age</th>
               <th className="p-3 max-md:hidden font-normal">Account Created</th>
@@ -154,7 +154,7 @@ const UserInfo = () => {
                     </div>
                   </td>
                   <td className="text-sm max-md:hidden">
-                    {user.location ? user.location : "Unknown"}
+                    {user.country ? user.country : "Unknown"}
                   </td>
                   <td className="text-sm max-md:hidden">{user.email}</td>
                   <td className="text-sm max-md:hidden">
