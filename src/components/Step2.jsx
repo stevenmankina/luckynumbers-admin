@@ -10,6 +10,42 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
 
   const [len, setLen] = useState(0);
 
+  const hrs = new Array(24).fill(0);
+  const min = new Array(60).fill(0);
+  const sec = new Array(60).fill(0);
+
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
+  const calculateDuration = () => {
+    let hrs = "00";
+    let mins = "00";
+    let secs = "00";
+
+
+    if (hours / 10 < 1) {
+      hrs = `0${hours}`;
+    } else {
+      hrs = `${hours}`;
+    }
+
+    if (minutes / 10 < 1) {
+      mins = `0${minutes}`;
+    } else {
+      mins = `${minutes}`;
+    }
+
+    if (seconds / 10 < 1) {
+      secs = `0${seconds}`;
+    } else {
+      secs = `${seconds}`;
+    }
+
+    let d =  (hrs + ':' + mins + ':' + secs)
+    return (d);
+  };
+
   const handleAddNo = () => {
     if (number != null && number !== "" && time != null) {
       if (numbers.filter((e) => e.number === number).length === 0) {
@@ -78,6 +114,12 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
   useEffect(() => {
     setLen(numbers.length);
   }, [numbers.length]);
+
+
+  useEffect(() => {
+    let newTime = calculateDuration();
+    setTime(newTime);
+  }, [hours, minutes, seconds])
 
   return (
     <>
@@ -149,15 +191,48 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
                 ))}
 
               <div className="flex">
-                <input
-                  type="time"
-                  value={time}
-                  onChange={(e) => setTime(e.target.value)}
-                  className="outline-none border-2 py-1 px-2 my-1 rounded-md border-primary-300"
-                  name="date"
-                  step={1}
-                />
-                <p className=" px-4  rounded-md cursor-pointer"></p>
+              <select
+            name="addno"
+            value={hours}
+            onChange={(e) => {
+              setHours(e.target.value);
+            }}
+            className=" py-1 px-2 my-1 border-2 rounded-md border-primary-300 outline-none"
+            id=""
+          >
+            {hrs.map((num, i) => (
+              <option value={i}>{i}</option>
+            ))}
+          </select>
+
+          <select
+            name="addno"
+            value={minutes}
+            onChange={(e) => {
+              setMinutes(e.target.value);
+            }}
+            className=" py-1 px-2 my-1 border-2 rounded-md border-primary-300 outline-none"
+            id=""
+          >
+            {min.map((num, i) => (
+              <option value={i}>{i}</option>
+            ))}
+          </select>
+
+          <select
+            name="addno"
+            value={seconds}
+            onChange={(e) => {
+              setSeconds(e.target.value);
+            }}
+            className=" py-1 px-2 my-1 border-2 rounded-md border-primary-300 outline-none"
+            id=""
+          >
+            {sec.map((num, i) => (
+              <option value={i}>{i}</option>
+            ))}
+          </select>
+                <p className=" px-4  rounded-md"></p>
               </div>
             </div>
           </div>

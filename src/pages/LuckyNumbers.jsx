@@ -17,7 +17,7 @@ const LuckyNumbers = () => {
   const [step, setStep] = useState(0);
   const [datetime, setDatetime] = useState(null);
   const [numbers, setNumbers] = useState([]);
-  const [duration, setDuration] = useState(null);
+  const [duration, setDuration] = useState('00:00:00');
 
   const { isLoggedIn, resetUser, userToken } = useContext(AuthContext);
 
