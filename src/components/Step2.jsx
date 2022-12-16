@@ -142,7 +142,7 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
           CONTINUE &gt;{" "}
         </button>
 
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center ">
           <div className="flex ">
             <p className="px-3  text-primary-500 text-lg">Add Number</p>
 
@@ -169,7 +169,7 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
               </select>
             </div>
           </div>
-          <div className="flex ">
+          <div className="flex">
             <p className="px-3 text-primary-500 text-lg">Add Time</p>
 
             <div className=" flex flex-col">
@@ -177,7 +177,7 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
                 numbers.map((obj, i) => (
                   <div className="flex items-center" key={obj.number}>
                     <p className="py-1 w-full px-5 border-2 rounded-md">
-                      {obj.time}
+                      {obj.time.slice(3,8) }
                     </p>
                     <p
                       className=" px-3  rounded-md cursor-pointer"
@@ -189,47 +189,39 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
                 ))}
 
               <div className="flex">
-                <select
-                  name="addno"
-                  value={hours}
-                  onChange={(e) => {
-                    setHours(e.target.value);
-                  }}
-                  className=" py-1 px-2 my-1 border-2 rounded-md border-primary-300 outline-none"
-                  id=""
-                >
-                  {hrs.map((num, i) => (
-                    <option value={i}>{i}</option>
-                  ))}
-                </select>
+                <div className="">
+                  <select
+                    name="mins"
+                    value={minutes}
+                    onChange={(e) => {
+                      setMinutes(e.target.value);
+                    }}
+                    className=" py-1 px-2 border-2 mt-1 rounded-md border-primary-300 outline-none"
+                    id=""
+                  >
+                    {min.map((num, i) => (
+                      <option value={i}>{i}</option>
+                      ))}
+                  </select>
+                      <p className="text-xs">Minutes</p>
+                </div>
+                <div className="">
 
-                <select
-                  name="addno"
-                  value={minutes}
-                  onChange={(e) => {
-                    setMinutes(e.target.value);
-                  }}
-                  className=" py-1 px-2 my-1 border-2 rounded-md border-primary-300 outline-none"
-                  id=""
-                >
-                  {min.map((num, i) => (
-                    <option value={i}>{i}</option>
-                  ))}
-                </select>
-
-                <select
-                  name="addno"
-                  value={seconds}
-                  onChange={(e) => {
-                    setSeconds(e.target.value);
-                  }}
-                  className=" py-1 px-2 my-1 border-2 rounded-md border-primary-300 outline-none"
-                  id=""
-                >
-                  {sec.map((num, i) => (
-                    <option value={i}>{i}</option>
-                  ))}
-                </select>
+                  <select
+                    name="sec"
+                    value={seconds}
+                    onChange={(e) => {
+                      setSeconds(e.target.value);
+                    }}
+                    className=" py-1 px-2 mt-1 border-2 rounded-md border-primary-300 outline-none"
+                    id=""
+                  >
+                    {sec.map((num, i) => (
+                      <option value={i}>{i}</option>
+                      ))}
+                  </select>
+                      <p className="text-xs">Seconds</p>
+                </div>
                 <p className=" px-4  rounded-md"></p>
               </div>
             </div>
