@@ -6,7 +6,6 @@ import Sponsors from "./Sponsors";
 import LuckyNumbers from "./LuckyNumbers";
 import Navbar from "../components/Navbar";
 import { Route, Routes } from "react-router-dom";
-import Marketing from "./Marketing";
 import Login from "./Login";
 import { AuthContext } from "../context/AuthContext";
 import { useMatch, useResolvedPath } from "react-router-dom";
@@ -39,7 +38,6 @@ const Layout = () => {
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/luckynumbers" element={<LuckyNumbers />} />
               <Route path="/sponsors" element={<Sponsors />} />
-              <Route path="/marketing" element={<Marketing />} />
               <Route path="/login" element={<Login />} />
             </Routes>
           </div>

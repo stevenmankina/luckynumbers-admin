@@ -5,7 +5,6 @@ import {
   Tray,
   SquaresFour,
   Stack,
-  EnvelopeSimple,
 } from "phosphor-react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
@@ -53,11 +52,6 @@ const Navbar = () => {
           <NavLink to={"/sponsors"} onClick={()=>setSidebar(false)}>
             <Stack size={32} />
             <span className="font-semibold pl-4">Sponsors & Adverts</span>
-          </NavLink>
-
-          <NavLink to={"/marketing"} onClick={()=>setSidebar(false)}>
-            <EnvelopeSimple size={32} />
-            <span className="font-semibold pl-4">Marketing Emails</span>
           </NavLink>
         </div>
       </div>
