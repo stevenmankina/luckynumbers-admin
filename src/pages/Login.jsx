@@ -1,15 +1,14 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
-import { redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../util/config";
 
 const Login = () => {
+  const { isLoggedIn } = useContext(AuthContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const { isLoggedIn } = useContext(AuthContext);
 
   const login = async (e) => {
     e.preventDefault();
@@ -26,8 +25,7 @@ const Login = () => {
         console.log("logged in successfully");
       }
     } catch (error) {
-      toast.error('Failed to login');
-
+      toast.error("Failed to login");
       isLoggedIn();
     }
   };

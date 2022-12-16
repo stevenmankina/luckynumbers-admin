@@ -23,11 +23,10 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
   };
 
   const getSponsor = async () => {
-    if(!sponsor?._id) return;
+    if (!sponsor?._id) return;
 
     try {
-      
-      let url = `${BASE_URL}/sponsor/${sponsor._id}/get`
+      let url = `${BASE_URL}/sponsor/${sponsor._id}/get`;
 
       let res = await axios.get(url, {
         headers: {
@@ -35,10 +34,9 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
         },
       });
 
-      if(res.status === 200) {
+      if (res.status === 200) {
         setSponsor(res.data.sponsorExists);
       }
-
     } catch (error) {
       let status = error.response.status;
       if (status === 401 || status === 403) {
@@ -50,8 +48,7 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
         toast.error("Some Unknown Error Occured");
       }
     }
-
-  }
+  };
 
   const createSponsor = async () => {
     let url = `${BASE_URL}/sponsor/create`;
@@ -75,7 +72,6 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
       });
 
       if (res.status === 200) {
-        // setPopup(false);
         setSponsor(res.data.sponsor);
         toast.success("Sponsor Created Successfully");
       }
@@ -114,7 +110,6 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
       });
 
       if (res.status === 200) {
-        // setPopup(false);
         toast.success("Sponsor Updated Successfully");
       }
     } catch (error) {
@@ -161,7 +156,11 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
     <>
       {advertPopup && (
         <div className="fixed w-10/12 ml-[-24px] h-full flex justify-center bg-slate-200">
-          <AddAdvert setAdvertPopup={setAdvertPopup} sid={sponsor?._id} getSponsor={getSponsor} />
+          <AddAdvert
+            setAdvertPopup={setAdvertPopup}
+            sid={sponsor?._id}
+            getSponsor={getSponsor}
+          />
         </div>
       )}
 
@@ -170,24 +169,14 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
           <h1 className="text-3xl font-bold">Sponsor Profile</h1>
 
           <button
-            onClick={() => {setPopup(false); setSponsor(null);}}
+            onClick={() => {
+              setPopup(false);
+              setSponsor(null);
+            }}
             className="px-3  py-1 rounded cursor-pointer my-3 text-white bg-primary-500"
           >
             Back
           </button>
-          {/* <p className="font-semibold">Sponsor photo</p> */}
-
-          {/* <div className="uploadimage flex items-center">
-            <img src="/logo192.png" className="w-1/4" alt="" />
-
-            <div className="text-left w-3/4 pl-4">
-              <p>Upload your photo</p>
-              <p className="text-xs my-2">
-                Your photo should be in PNG or JPG format
-              </p>
-              <input type="file" className="w-full" name="" id="" />
-            </div>
-          </div> */}
 
           <form action="" onSubmit={(e) => handleSubmit(e)} className="mt-4">
             <p className="font-semibold mt-3">Sponsor Name</p>
@@ -237,22 +226,6 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
               placeholder="email"
               name="email"
             />
-{/* 
-            <p className="font-semibold mt-3">Live Adverts</p>
-            <input
-              type="text"
-              className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
-              placeholder="Number of Adverts"
-              name="liveadverts"
-            /> */}
-
-            {/* <p className="font-semibold mt-3">Wallet on account</p>
-            <input
-              type="email"
-              className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
-              placeholder="text"
-              name="email"
-            /> */}
 
             <p className="font-semibold mt-3">Country</p>
             <input
@@ -324,25 +297,31 @@ const AddSponsors = ({ setPopup, sponsor, setSponsor }) => {
           </form>
         </div>
 
+        {/* Show adverts only when sponsor is there */}
         {sponsor?._id && (
           <>
-          <div className="flex w-full flex-col">
-
-            <div className="flex justify-between mt-3 px-10 h-fit items-cente w-full">
-              <h1 className="text-3xl font-bold">Live Adverts</h1>
-              <button
-                onClick={() => setAdvertPopup(true)}
-                className="px-3 mx-3 py-1 rounded cursor-pointer text-white bg-primary-500"
-              >
-                Add Advert
-              </button>
+            <div className="flex w-full flex-col">
+              <div className="flex justify-between mt-3 px-10 h-fit items-cente w-full">
+                <h1 className="text-3xl font-bold">Live Adverts</h1>
+                <button
+                  onClick={() => setAdvertPopup(true)}
+                  className="px-3 mx-3 py-1 rounded cursor-pointer text-white bg-primary-500"
+                >
+                  Add Advert
+                </button>
+              </div>
+              {/* Sponsors List */}
+              <div className=" flex w-full flex-wrap  ">
+                {sponsor?.noOfAdverts.map((id) => (
+                  <Advert
+                    key={id}
+                    sid={sponsor?._id}
+                    id={id}
+                    getSponsor={getSponsor}
+                  />
+                ))}
+              </div>
             </div>
-            <div className=" flex w-full flex-wrap  ">
-              {sponsor?.noOfAdverts.map((id) => (
-                <Advert key={id} sid={sponsor?._id} id={id} getSponsor={getSponsor} />
-              ))}
-            </div>
-                </div>
           </>
         )}
       </div>

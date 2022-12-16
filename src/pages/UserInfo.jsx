@@ -9,36 +9,35 @@ import { getAge, getDate } from "../util/age";
 import { BASE_URL } from "../util/config";
 import UserProfile from "./UserProfile";
 
+// user info
 const UserInfo = () => {
-  const [popup, setPopup] = useState(false);
-
-  const [users, setUsers] = useState([]);
-
-  const [user, setUser] = useState(null);
-
   const { resetUser, userToken } = useContext(AuthContext);
+
+  const [popup, setPopup] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState(null);
 
   const searchUsers = async (search, searchValue) => {
     if (search === null || search === undefined) {
       return;
     }
 
-    var url;
+    let url;
     if (search === 1) {
       url = `${BASE_URL}/user/age?value=${searchValue.age}`;
     } else if (search === 2) {
       url = `${BASE_URL}/user/country?value=${searchValue.location}`;
     } else if (search === 3) {
-      url = `${BASE_URL}/user/gender?value=${searchValue.gender ? searchValue.gender : 'Male'}`;
+      url = `${BASE_URL}/user/gender?value=${
+        searchValue.gender ? searchValue.gender : "Male"
+      }`;
     }
-
-    console.log(url);
 
     try {
       let res = await axios.get(url, {
         headers: {
           Authorization: "Bearer " + userToken,
-        }
+        },
       });
       if (res.status === 200) {
         setUsers(res.data.data);
@@ -64,7 +63,7 @@ const UserInfo = () => {
       let res = await axios.get(url, {
         headers: {
           Authorization: "Bearer " + userToken,
-        }
+        },
       });
       if (res.status === 200) {
         setUsers(res.data.data);
@@ -100,17 +99,12 @@ const UserInfo = () => {
       )}
 
       <div className="md:p-6 p-2">
+
         <Title title={"User Info"} />
 
         <SearchBar searchUsers={searchUsers} />
 
         <div className="p-7">
-          {/* <button
-            onClick={() => setPopup(true)}
-            className="px-3 py-1 rounded text-white bg-primary-500"
-          >
-            Add User
-          </button> */}
         </div>
 
         <table className="md:table-auto w-11/12 ">
@@ -124,8 +118,6 @@ const UserInfo = () => {
               <th className="p-3 max-md:hidden font-normal">Email</th>
               <th className="p-3 max-md:hidden font-normal">Age</th>
               <th className="p-3 max-md:hidden font-normal">Account Created</th>
-              {/* <th className="p-3 max-md:hidden font-normal">Coins Held</th>
-              <th className="p-3  font-normal">Active</th> */}
             </tr>
           </thead>
           <tbody>
@@ -145,7 +137,6 @@ const UserInfo = () => {
                     }}
                     className="p-3 cursor-pointer flex"
                   >
-                    {/* <img src="/logo192.png" className="w-10 h-10 mr-2" alt="" /> */}
                     <div className="text-left">
                       <p className="font-semibold text-sm">
                         {user.firstname + " " + user.lastname}
@@ -163,10 +154,6 @@ const UserInfo = () => {
                   <td className="text-sm max-md:hidden">
                     {getDate(user.created_at)}
                   </td>
-                  {/* <td className="text-sm max-md:hidden">100</td>
-                  <td>
-                    <input type="checkbox" name="active" id="" />
-                  </td> */}
                 </tr>
               ))}
           </tbody>

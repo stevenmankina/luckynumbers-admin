@@ -1,25 +1,21 @@
-import { useEditor } from "@tiptap/react";
 import axios from "axios";
 import { MagnifyingGlass } from "phosphor-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import TextEditor from "../components/TextEditor";
 import Title from "../components/Title";
 import { BASE_URL } from "../util/config";
 
 const Marketing = () => {
+
   const [text, setText] = useState("");
-
   const [subject, setSubject] = useState("");
-
   const [userList, setUserList] = useState(false);
-
   const [userEmails, setUserEmails] = useState([]);
-
   const [userEmail, setUserEmail] = useState("");
 
+
+  // Will fetch all the users when admin try to input the email
   const searchUsers = async () => {
-    // let querry = "Pranit";
-    // let querry = e.target.value;
 
     if (userEmail.length >= 3) {
       let url = `${BASE_URL}/player`;
@@ -47,7 +43,7 @@ const Marketing = () => {
         </h2>
 
         <div className="flex px-6">
-          <div className=" md:w-5/12 relative"  >
+          <div className=" md:w-5/12 relative">
             <p className="py-2 text-2xl text-left">Users</p>
             <div className="flex">
               <input
@@ -58,7 +54,6 @@ const Marketing = () => {
                 onChange={(e) => setUserEmail(e.target.value)}
                 className="rounded p-1 w-6/12 outline-none border-2 mr-1"
                 onClick={() => setUserList(true)}
-                
               />
               <div className="px-3 rounded bg-primary-500">
                 <MagnifyingGlass
@@ -73,11 +68,20 @@ const Marketing = () => {
                 userList ? "" : "hidden"
               } bg-purple-50`}
             >
-              <p onClick={()=>setUserList(false)} className="text-right cursor-pointer p-2">X</p>
+              <p
+                onClick={() => setUserList(false)}
+                className="text-right cursor-pointer p-2"
+              >
+                X
+              </p>
+
               {userEmails &&
                 userEmails.map((user) => (
                   <div
-                    onClick={() => {setUserEmail(user.email); setUserList(false)}}
+                    onClick={() => {
+                      setUserEmail(user.email);
+                      setUserList(false);
+                    }}
                     key={user._id}
                     className="p-1 border m-1 z-50 cursor-pointer border-black rounded"
                   >
@@ -85,11 +89,6 @@ const Marketing = () => {
                     <p>{user.email}</p>
                   </div>
                 ))}
-
-              {/* <div className="p-1 border cursor-pointer border-black rounded">
-                <p>User</p>
-                <p>email</p>
-              </div> */}
             </div>
           </div>
           <div className=" md:w-5/12">

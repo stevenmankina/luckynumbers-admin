@@ -5,6 +5,7 @@ const Step1 = ({ setStep, datetime, setDatetime, setDuration, duration }) => {
   const min = new Array(60).fill(0);
   const sec = new Array(60).fill(0);
 
+  // Custom Duration input for cross browser support
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
@@ -13,7 +14,6 @@ const Step1 = ({ setStep, datetime, setDatetime, setDuration, duration }) => {
     let hrs = "00";
     let mins = "00";
     let secs = "00";
-
 
     if (hours / 10 < 1) {
       hrs = `0${hours}`;
@@ -33,8 +33,8 @@ const Step1 = ({ setStep, datetime, setDatetime, setDuration, duration }) => {
       secs = `${seconds}`;
     }
 
-    let d =  (hrs + ':' + mins + ':' + secs)
-    return (d);
+    let d = hrs + ":" + mins + ":" + secs;
+    return d;
   };
 
   const handleContinue = () => {
@@ -46,8 +46,7 @@ const Step1 = ({ setStep, datetime, setDatetime, setDuration, duration }) => {
   useEffect(() => {
     let newDuration = calculateDuration();
     setDuration(newDuration);
-  }, [hours, minutes, seconds])
-
+  }, [hours, minutes, seconds]);
 
   return (
     <div className="p-10">
@@ -64,7 +63,7 @@ const Step1 = ({ setStep, datetime, setDatetime, setDuration, duration }) => {
       <button
         onClick={handleContinue}
         className={`px-10 bg-primary-500 py-2 my-3 ${
-          datetime === null || duration === '00:00:00'
+          datetime === null || duration === "00:00:00"
             ? "bg-primary-150 text-primary-500"
             : ""
         } text-white`}
@@ -85,15 +84,6 @@ const Step1 = ({ setStep, datetime, setDatetime, setDuration, duration }) => {
           />
 
           <p className="m-2 mt-3">Duration</p>
-          {/* <input
-            type="time"
-            onChange={(e) => setDuration(e.target.value)}
-            value={duration}
-            className="outline-none border p-1 rounded-sm border-primary-500"
-            name="date"
-            step={1}
-          />
-           */}
 
           <select
             name="addno"
@@ -126,9 +116,7 @@ const Step1 = ({ setStep, datetime, setDatetime, setDuration, duration }) => {
           <select
             name="addno"
             value={seconds}
-            onChange={(e) => {
-              setSeconds(e.target.value);
-            }}
+            onChange={(e) => setSeconds(e.target.value)}
             className=" py-1 px-2 my-1 border-2 rounded-md border-primary-300 outline-none"
             id=""
           >
@@ -136,13 +124,6 @@ const Step1 = ({ setStep, datetime, setDatetime, setDuration, duration }) => {
               <option value={i}>{i}</option>
             ))}
           </select>
-
-          {/* <button
-          onClick={()=>console.log(duration)}
-          className="px-10 bg-primary-500 py-1 mx-4 text-white"
-          >
-          Save
-        </button> */}
         </div>
       </div>
     </div>

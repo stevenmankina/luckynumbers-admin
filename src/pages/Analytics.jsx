@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect } from "react";
-import SearchBar from "../components/SearchBar";
 import Title from "../components/Title";
 import { useState } from "react";
 import { BASE_URL } from "../util/config";
@@ -12,9 +11,10 @@ import GenderBigChart from "../charts/GenderBigChart";
 import MonthlyData from "../charts/MonthlyData";
 
 const Analytics = () => {
-  const [genderData, setGenderData] = useState({ male: 0, female: 0 });
-  const { isLoggedIn, resetUser, userToken } = useContext(AuthContext);
 
+  const { resetUser, userToken } = useContext(AuthContext);
+  
+  const [genderData, setGenderData] = useState({ male: 0, female: 0 });
   const [users, setUsers] = useState([]);
   const [winners, setWinners] = useState(0);
 
@@ -109,6 +109,7 @@ const Analytics = () => {
     }
   };
 
+  // useEffect to fetch data periodically (5 sec)
   useEffect(() => {
     let interval = setInterval(() => {
       getGenderData();
@@ -125,11 +126,9 @@ const Analytics = () => {
       <div className="md:p-6 p-2">
         <Title title={"Analytics"} />
 
-        {/* <SearchBar/> */}
-
         <div className="flex flex-wrap">
           <div className=" w-1/2 border-gray-400 border-r h-[50vh] p-6">
-            <h2 className='font-bold text-xl text-left px-6'>Total Users</h2>
+            <h2 className="font-bold text-xl text-left px-6">Total Users</h2>
             <MonthlyData data={users.length} />
           </div>
           <div className=" w-1/2 border-gray-400 border-l border-b p-6">
@@ -137,16 +136,11 @@ const Analytics = () => {
           </div>
           <div className=" w-1/2 border-gray-400 border-r border-t p-4">
             <h2 className="font-bold text-xl text-left p-3">Genders</h2>
-
-            {/* <img src="/genders.png" width='100%' alt="" /> */}
-
             <GenderBigChart gData={genderData} />
           </div>
           <div className=" w-1/2 border-gray-400 border-l h-[50vh] border-t p-6">
             <h2 className="font-bold text-xl text-left p-3">Total Winners</h2>
-            {/* <div className="w-full h-full"> */}
-              <MonthlyData data={winners} />
-            {/* </div> */}
+            <MonthlyData data={winners} />
           </div>
         </div>
       </div>

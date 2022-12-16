@@ -1,15 +1,6 @@
 import React, { useEffect } from "react";
 import Title from "../components/Title";
-import {
-  User,
-  ChartPieSlice,
-  ShoppingCartSimple,
-  CurrencyDollar,
-  Tray,
-  SquaresFour,
-  Stack,
-  EnvelopeSimple,
-} from "phosphor-react";
+import { User, ShoppingCartSimple, CurrencyDollar } from "phosphor-react";
 import { useState } from "react";
 import { BASE_URL } from "../util/config";
 import axios from "axios";
@@ -19,42 +10,13 @@ import { AuthContext } from "../context/AuthContext";
 import Gender from "../charts/Gender";
 
 const Dashboard = () => {
-  const [users, setUsers] = useState([]);
+  const { resetUser, userToken } = useContext(AuthContext);
 
   const [downloads, setDownloads] = useState(0);
   const [winners, setWinners] = useState(0);
-
   const [cards, setCards] = useState(0);
   const [gameWinners, setGameWinners] = useState(0);
-
-  const [genderData, setGenderData] = useState({male: 0, female: 0});
-
-  const { isLoggedIn, resetUser, userToken } = useContext(AuthContext);
-
-  const getAllUsers = async () => {
-    let url = `${BASE_URL}/user/searchAll`;
-
-    try {
-      let res = await axios.get(url, {
-        headers: {
-          Authorization: "Bearer " + userToken,
-        },
-      });
-      if (res.status === 200) {
-        setUsers(res.data.data);
-      }
-    } catch (error) {
-      let status = error.response.status;
-      if (status === 401 || status === 403) {
-        resetUser();
-        toast.error("You are not authenticated");
-      } else if (error.response.data.message) {
-        toast.error(error.response.data.message);
-      } else {
-        toast.error("Some Unknown Error Occured");
-      }
-    }
-  };
+  const [genderData, setGenderData] = useState({ male: 0, female: 0 });
 
   const getTotalCards = async () => {
     let url = `${BASE_URL}/game/allCard/downloaded`;
@@ -80,6 +42,7 @@ const Dashboard = () => {
       }
     }
   };
+
   const getTotalWinners = async () => {
     let url = `${BASE_URL}/game/winner`;
 
@@ -107,14 +70,16 @@ const Dashboard = () => {
 
   const getGameData = async () => {
     try {
-      // get upcoming game
+      // get upcoming game (Latest)
       let url = `${BASE_URL}/game/upcoming-game`;
       let res = await axios.get(url, {
         headers: {
           Authorization: "Bearer " + userToken,
         },
       });
+
       if (res.status === 200) {
+        // Get All Cards of that game
         let url = `${BASE_URL}/game/${res.data.data._id}/card`;
         let cardRes = await axios.get(url, {
           headers: {
@@ -124,9 +89,7 @@ const Dashboard = () => {
         if (cardRes.status === 200) {
           let data = cardRes.data.data;
           setCards(data.length);
-
           let noOfWinners = 0;
-
           data.forEach((card) => {
             if (card.is_winner) {
               noOfWinners = noOfWinners + 1;
@@ -150,35 +113,35 @@ const Dashboard = () => {
   };
 
   const getGenderData = async () => {
-
     var totalMales = 0;
     var totalFemales = 0;
-    
+
     try {
       let maleUrl = `${BASE_URL}/user/gender?value=male`;
       let femaleUrl = `${BASE_URL}/user/gender?value=female`;
+      // Get all males
       let male = await axios.get(maleUrl, {
         headers: {
           Authorization: "Bearer " + userToken,
         },
       });
       if (male.status === 200) {
-        totalMales = male.data.data.length
+        totalMales = male.data.data.length;
       }
+      // get all females
       let female = await axios.get(femaleUrl, {
         headers: {
           Authorization: "Bearer " + userToken,
         },
       });
       if (female.status === 200) {
-        totalFemales = female.data.data.length
+        totalFemales = female.data.data.length;
       }
 
       setGenderData({
         male: totalMales,
-        female: totalFemales
-      })
-
+        female: totalFemales,
+      });
     } catch (error) {
       let status = error.response.status;
       if (status === 401 || status === 403) {
@@ -190,9 +153,9 @@ const Dashboard = () => {
         toast.error("Some Unknown Error Occured");
       }
     }
-    
   };
 
+  // fetch data periodically (5 sec)
   useEffect(() => {
     let interval = setInterval(() => {
       getTotalCards();
@@ -211,7 +174,6 @@ const Dashboard = () => {
         <Title title={"Dashboard"} />
 
         <div className="stats flex md:flex-row flex-col">
-          {/* Graph  */}
           <div className="app-stats  border-gray-200 md:w-3/4 border rounded-xl">
             <img src="/app-stat.png" className="w-full" alt="" />
           </div>
@@ -305,10 +267,7 @@ const Dashboard = () => {
 
               <div className="stat-card p-3 justify-center items-start flex flex-col md:w-1/3 my-1 md:mx-6 bg-warning-150 rounded-xl">
                 <p className="text-left">Users By Gender</p>
-                {/* <img src="/pie-chart.png" className="w-full" alt="" /> */}
-                {/* <div className=" "> */}
-                  <Gender gData={genderData} />
-                {/* </div> */}
+                <Gender gData={genderData} />
               </div>
 
               <div className="stat-card p-3 md:w-1/3 my-1 bg-blue-100 rounded-xl">

@@ -9,7 +9,8 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
 
 const EditTimestamp = ({ setTimePopup, game, getAllGames }) => {
-  const { isLoggedIn, resetUser, userToken } = useContext(AuthContext);
+  const { resetUser, userToken } = useContext(AuthContext);
+
   const [time, setTime] = useState("");
 
   const updateGame = async () => {
@@ -18,7 +19,7 @@ const EditTimestamp = ({ setTimePopup, game, getAllGames }) => {
 
       let data = {
         starts_at: time,
-        duration: game.duration
+        duration: game.duration,
       };
 
       let res = await axios.patch(url, data, {
@@ -45,7 +46,6 @@ const EditTimestamp = ({ setTimePopup, game, getAllGames }) => {
   };
 
   useEffect(() => {
-    console.log(game?.starts_at);
     setTime((game?.starts_at).slice(0, 19));
   }, []);
 
@@ -74,7 +74,7 @@ const EditTimestamp = ({ setTimePopup, game, getAllGames }) => {
           />
 
           <button
-          onClick={updateGame}
+            onClick={updateGame}
             className="px-3 mx-3 mt-5 py-1 rounded cursor-pointer text-white bg-primary-500"
           >
             Save

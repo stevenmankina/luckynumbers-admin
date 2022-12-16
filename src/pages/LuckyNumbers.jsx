@@ -11,18 +11,19 @@ import axios from "axios";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
-import { getSeconds, timeInMilliseconds } from "../util/age";
+import { getSeconds } from "../util/age";
 
+
+// This is a parent component of all steps 
+// It store all the data which is taken as input from user
 const LuckyNumbers = () => {
+  const { resetUser, userToken } = useContext(AuthContext);
+
   const [step, setStep] = useState(0);
   const [datetime, setDatetime] = useState(null);
   const [numbers, setNumbers] = useState([]);
-  const [duration, setDuration] = useState('00:00:00');
-
-  const { isLoggedIn, resetUser, userToken } = useContext(AuthContext);
-
+  const [duration, setDuration] = useState("00:00:00");
   const [winning, setWinning] = useState({ win_at: 0, win_from: 0 });
-
   const [games, setGames] = useState([]);
 
   const getAllGames = async () => {
@@ -32,7 +33,7 @@ const LuckyNumbers = () => {
       let res = await axios.get(url, {
         headers: {
           Authorization: "Bearer " + userToken,
-        }
+        },
       });
       if (res.status === 200) {
         setGames(res.data.data);
@@ -50,11 +51,13 @@ const LuckyNumbers = () => {
     }
   };
 
-
+  // Save the game after completing all the steps
+  // and go to step 4 after successfully creating a game
   const saveGame = async () => {
     let win_array = [];
     let time_array = [];
 
+    // break the number object into two strings
     for (let i = 0; i < numbers.length; i++) {
       let numberObj = numbers[i];
       win_array.push(parseInt(numberObj.number));
@@ -73,18 +76,16 @@ const LuckyNumbers = () => {
       time_array,
     };
 
-    console.log(data);
-
     try {
       let res = await axios.post(url, data, {
         headers: {
           Authorization: "Bearer " + userToken,
-        }
+        },
       });
 
       if (res.status === 201) {
         setStep(4);
-        toast.success('Game Added Successfully');
+        toast.success("Game Added Successfully");
       }
     } catch (error) {
       console.log(error.response.data);
@@ -100,16 +101,18 @@ const LuckyNumbers = () => {
     }
   };
 
-
-
   return (
     <>
       <div className="p-2 md:p-6">
         <Title title={"Lucky Numbers Card"} />
 
+        {/* steper component for showing active step  */}
         {step > 0 ? <Stepper step={step} /> : null}
 
-        {step === 0 ? <Step0 setStep={setStep} games={games} getAllGames={getAllGames} /> : null}
+        {step === 0 ? (
+          <Step0 setStep={setStep} games={games} getAllGames={getAllGames} />
+        ) : null}
+
         {step === 1 ? (
           <Step1
             setStep={setStep}
@@ -119,9 +122,16 @@ const LuckyNumbers = () => {
             setDuration={setDuration}
           />
         ) : null}
+
         {step === 2 ? (
-          <Step2 setStep={setStep} numbers={numbers} duration={duration} setNumbers={setNumbers} />
+          <Step2
+            setStep={setStep}
+            numbers={numbers}
+            duration={duration}
+            setNumbers={setNumbers}
+          />
         ) : null}
+
         {step === 3 ? (
           <Step3
             setStep={setStep}
@@ -130,7 +140,9 @@ const LuckyNumbers = () => {
             setWinning={setWinning}
           />
         ) : null}
+
         {step === 4 ? <Step4 setStep={setStep} numbers={numbers} /> : null}
+
       </div>
     </>
   );

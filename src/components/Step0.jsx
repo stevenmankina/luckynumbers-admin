@@ -9,7 +9,7 @@ import { getDate, getTime } from "../util/age";
 import EditTimestamp from "./EditTimestamp";
 
 const Step0 = ({ setStep, getAllGames, games }) => {
-  const { isLoggedIn, resetUser } = useContext(AuthContext);
+  const { resetUser } = useContext(AuthContext);
 
   const [numbers, setNumbers] = useState([5, 8, 9, 7, 6]);
 
@@ -47,12 +47,17 @@ const Step0 = ({ setStep, getAllGames, games }) => {
 
   return (
     <>
-    
       <div className="relative">
         {popup && <WinningNumbers numbers={numbers} setPopup={setPopup} />}
       </div>
       <div className="relative">
-        {timePopup && <EditTimestamp setTimePopup={setTimePopup} game={game} getAllGames={getAllGames} />}
+        {timePopup && (
+          <EditTimestamp
+            setTimePopup={setTimePopup}
+            game={game}
+            getAllGames={getAllGames}
+          />
+        )}
       </div>
 
       <div className="p-10">
@@ -69,7 +74,6 @@ const Step0 = ({ setStep, getAllGames, games }) => {
               <th className="p-3 max-md:hidden font-normal">Date</th>
               <th className="p-3 max-md:hidden font-normal">Time</th>
               <th className="p-3 max-md:hidden font-normal">Winning Numbers</th>
-              {/* <th className="p-3 max-md:hidden font-normal">Edit</th> */}
               <th className="p-3 max-md:hidden font-normal">Remove Show</th>
             </tr>
           </thead>
@@ -110,7 +114,6 @@ const Step0 = ({ setStep, getAllGames, games }) => {
                 >
                   view
                 </td>
-                {/* <td className="text-sm max-md:hidden"> <Wrench className="m-auto" size={20} /> </td> */}
                 <td className="text-sm  max-md:hidden">
                   {" "}
                   <p

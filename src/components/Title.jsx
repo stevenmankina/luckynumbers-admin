@@ -2,9 +2,9 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 const Title = ({ title }) => {
-  const [logoutBtn, setLogoutBtn] = useState(false);
+  const { resetUser } = useContext(AuthContext);
 
-  const { isLoggedIn, resetUser } = useContext(AuthContext);
+  const [logoutBtn, setLogoutBtn] = useState(false);
 
   return (
     <>
@@ -19,7 +19,13 @@ const Title = ({ title }) => {
         />
       </div>
       {logoutBtn && (
-        <div  onClick={()=>{resetUser(); setLogoutBtn(false)}} className="absolute z-50 cursor-pointer bg-purple-50  p-2 rounded border right-10">
+        <div
+          onClick={() => {
+            resetUser();
+            setLogoutBtn(false);
+          }}
+          className="absolute z-50 cursor-pointer bg-purple-50  p-2 rounded border right-10"
+        >
           Logout
         </div>
       )}

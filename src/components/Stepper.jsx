@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Stepper = ({step}) => {
-
+const Stepper = ({ step }) => {
   return (
     <>
-
-      <h2 className="text-4xl text-primary-500 font-light my-8">Pre-determined winning cards</h2>
+      <h2 className="text-4xl text-primary-500 font-light my-8">
+        Pre-determined winning cards
+      </h2>
 
       <div className="flex justify-center items-center">
         <div

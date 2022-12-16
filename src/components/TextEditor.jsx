@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from "react";
+import React, { useRef } from "react";
 import JoditEditor from "jodit-react";
 
 const TextEditor = ({ text, setText }) => {
@@ -11,9 +11,8 @@ const TextEditor = ({ text, setText }) => {
       className="text-left min-h-[50vh]"
         ref={editor}
         value={text}
-        tabIndex={1} // tabIndex of textarea
-        onBlur={(newContent) => setText(newContent)} // preferred to use only this option to update the content for performance reasons
-        // onChange={(newContent) => setText(newContent)}
+        tabIndex={1}
+        onBlur={(newContent) => setText(newContent)}
       />
 
       <button className="px-4 py-1 my-5 float-right border-primary-500 border-2 text-white rounded bg-primary-500" onClick={()=> console.log(text)}>Send</button>

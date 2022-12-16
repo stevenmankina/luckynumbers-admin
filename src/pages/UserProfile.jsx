@@ -3,21 +3,18 @@ import React from "react";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
-import { getDate, getDateInput } from "../util/age";
+import { getDateInput } from "../util/age";
 import { BASE_URL } from "../util/config";
 
 const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
-  const { isLoggedIn, resetUser, userToken } = useContext(AuthContext);
+  const { resetUser, userToken } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(e);
 
     if (user._id) {
       updateUser();
     } else {
-      console.log(user);
-      console.log("post");
       createUser();
     }
   };
@@ -31,7 +28,7 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
       lastname: user.lastname,
       email: user.email,
       dob: user.dob,
-      gender: user.gender ? user.gender : 'Male',
+      gender: user.gender ? user.gender : "Male",
       location: user.location,
     };
 
@@ -39,7 +36,7 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
       let res = await axios.post(url, data, {
         headers: {
           Authorization: "Bearer " + userToken,
-        }
+        },
       });
       if (res.status === 201) {
         getAllUsers();
@@ -77,7 +74,7 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
       let res = await axios.patch(url, data, {
         headers: {
           Authorization: "Bearer " + userToken,
-        }
+        },
       });
       if (res.status === 201) {
         getAllUsers();
@@ -105,7 +102,7 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
       let res = await axios.delete(url, {
         headers: {
           Authorization: "Bearer " + userToken,
-        }
+        },
       });
       if (res.status === 200) {
         getAllUsers();
@@ -128,8 +125,6 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
 
   return (
     <>
-      {/* <Title title={'User Info'}/> */}
-
       <div className="text-left w-full md:w-1/3 relative bg-white md:p-10 p-2">
         <p
           onClick={() => {
@@ -143,18 +138,6 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
 
         <h1 className="text-3xl font-bold">View Profile</h1>
         <p className="font-semibold">Sponsor photo</p>
-
-        {/* <div className="uploadimage flex items-center">
-          <img src="/logo192.png" className="w-1/4" alt="" />
-
-          <div className="text-left w-3/4 pl-4">
-            <p>Upload your photo</p>
-            <p className="text-xs my-2">
-              Your photo should be in PNG or JPG format
-            </p>
-            <input type="file" className="w-full" name="" id="" />
-          </div>
-        </div> */}
 
         <form action="" onSubmit={handleSubmit} className="mt-4">
           <p className="font-semibold mt-3">First Name</p>
@@ -246,22 +229,12 @@ const UserProfile = ({ user, setUser, setPopup, getAllUsers }) => {
             <option value="Other">Other</option>
           </select>
           <br />
-
-          {/* <p className="font-semibold mt-3">About Me</p>
-          <textarea
-            name="about"
-            className="px-2 py-1 mt-1 w-full border outline-none rounded-md"
-            rows="2"
-          ></textarea> */}
-
-          {/* <input
-            type="submit"
-            className="px-3 mt-5 py-1 rounded cursor-pointer text-white bg-primary-500"
-            value="Save Profile"
-          /> */}
         </form>
 
-        <button onClick={deleteUser} className="px-4 py-1 my-5 border-2 rounded text-primary-500 border-primary-500">
+        <button
+          onClick={deleteUser}
+          className="px-4 py-1 my-5 border-2 rounded text-primary-500 border-primary-500"
+        >
           Delete Account
         </button>
       </div>

@@ -32,7 +32,6 @@ const AddAdvert = ({ setAdvertPopup, sid, getSponsor }) => {
       });
 
       if (res.status === 200) {
-
         getSponsor();
 
         setAdvertPopup(false);
@@ -63,8 +62,7 @@ const AddAdvert = ({ setAdvertPopup, sid, getSponsor }) => {
           </p>
 
           <img src={media ? URL.createObjectURL(media) : ""} alt="" />
-
-          {/* <h2 className="text-2xl pt-4">Advert Title</h2> */}
+          
           <form onSubmit={(e) => handleAddAdvert(e)}>
             <p className="text-left mt-3 font-semibold">Upload Image</p>
 

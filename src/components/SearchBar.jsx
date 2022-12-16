@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MagnifyingGlass } from "phosphor-react";
 
-const SearchBar = ({searchUsers}) => {
+const SearchBar = ({ searchUsers }) => {
   const [search, setSearch] = useState(3);
 
   const [searchValue, setSearchValue] = useState({
@@ -11,17 +11,15 @@ const SearchBar = ({searchUsers}) => {
   });
 
   const handleSearch = async () => {
-    
-    if(search === 1) {
-      setSearchValue({ ...searchValue, location: '', gender: 'male' });
+    if (search === 1) {
+      setSearchValue({ ...searchValue, location: "", gender: "male" });
     } else if (search === 2) {
-      setSearchValue({ ...searchValue, age: 0, gender: 'male' });
+      setSearchValue({ ...searchValue, age: 0, gender: "male" });
     } else if (search === 3) {
-      setSearchValue({ ...searchValue, age: 0, location: '' });
+      setSearchValue({ ...searchValue, age: 0, location: "" });
     }
     await searchUsers(search, searchValue);
-
-  }
+  };
 
   return (
     <div className="md:w-fit w-full my-5">
@@ -34,9 +32,9 @@ const SearchBar = ({searchUsers}) => {
           <p className="font-semibold">Age</p>
           <input
             value={searchValue.age}
-            onChange={(e) =>{
+            onChange={(e) => {
               setSearchValue({ ...searchValue, age: e.target.value });
-              setSearch(1)
+              setSearch(1);
             }}
             className="border w-16 px-0.5 rounded border-primary-500 text-sm outline-none"
             type="number"
@@ -46,11 +44,11 @@ const SearchBar = ({searchUsers}) => {
         <div className="flex md:flex-col justify-around md:w-fit w-full text-left mx-2 p-2">
           <p className="font-semibold">Country</p>
           <input
-          value={searchValue.location}
-          onChange={(e) =>{
-            setSearchValue({ ...searchValue, location: e.target.value });
-            setSearch(2)
-          }}
+            value={searchValue.location}
+            onChange={(e) => {
+              setSearchValue({ ...searchValue, location: e.target.value });
+              setSearch(2);
+            }}
             className="border w-32 px-0.5 rounded border-primary-500 text-sm outline-none"
             type="text"
             name=""
@@ -61,13 +59,12 @@ const SearchBar = ({searchUsers}) => {
           <p className="font-semibold">Gender</p>
 
           <select
-          value={searchValue.gender}
-          onChange={(e) =>{
-            setSearchValue({ ...searchValue, gender: e.target.value });
-            setSearch(3)
-          }}
+            value={searchValue.gender}
+            onChange={(e) => {
+              setSearchValue({ ...searchValue, gender: e.target.value });
+              setSearch(3);
+            }}
             className="border rounded border-primary-500 text-sm outline-none"
-            
           >
             <option value="male">Male</option>
             <option value="female">Female</option>

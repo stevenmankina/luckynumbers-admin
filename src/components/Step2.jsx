@@ -10,6 +10,7 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
 
   const [len, setLen] = useState(0);
 
+  // Custom Duration input for cross browser support
   const hrs = new Array(24).fill(0);
   const min = new Array(60).fill(0);
   const sec = new Array(60).fill(0);
@@ -22,7 +23,6 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
     let hrs = "00";
     let mins = "00";
     let secs = "00";
-
 
     if (hours / 10 < 1) {
       hrs = `0${hours}`;
@@ -42,20 +42,22 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
       secs = `${seconds}`;
     }
 
-    let d =  (hrs + ':' + mins + ':' + secs)
-    return (d);
+    let d = hrs + ":" + mins + ":" + secs;
+    return d;
   };
 
+  // For Lucky Numbers Validation
+  // 1. Number should be unique
+  // 2. Time Should be less than total duration of game
+  // 3. Current time should be greater than previous time. i.e. in ascending order
   const handleAddNo = () => {
     if (number != null && number !== "" && time != null) {
       if (numbers.filter((e) => e.number === number).length === 0) {
-        
         let currSec = getSeconds(time);
         let durationSec = getSeconds(duration);
 
         if (numbers.length === 0) {
-          if(currSec < durationSec) {
-
+          if (currSec < durationSec) {
             let arr = numbers;
             arr.push({ number, time });
             setNumbers(arr);
@@ -68,11 +70,8 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
           }
         }
 
-
         let prevTime = numbers[numbers.length - 1].time;
-
         let prevSec = getSeconds(prevTime);
-
 
         if (prevSec < currSec) {
           if (currSec < durationSec) {
@@ -92,7 +91,7 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
         toast.error("Number Already added");
       }
     } else {
-      toast.error("Invalid Number");
+      toast.error("Invalid Number or time");
     }
   };
 
@@ -115,11 +114,10 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
     setLen(numbers.length);
   }, [numbers.length]);
 
-
   useEffect(() => {
     let newTime = calculateDuration();
     setTime(newTime);
-  }, [hours, minutes, seconds])
+  }, [hours, minutes, seconds]);
 
   return (
     <>
@@ -191,47 +189,47 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
                 ))}
 
               <div className="flex">
-              <select
-            name="addno"
-            value={hours}
-            onChange={(e) => {
-              setHours(e.target.value);
-            }}
-            className=" py-1 px-2 my-1 border-2 rounded-md border-primary-300 outline-none"
-            id=""
-          >
-            {hrs.map((num, i) => (
-              <option value={i}>{i}</option>
-            ))}
-          </select>
+                <select
+                  name="addno"
+                  value={hours}
+                  onChange={(e) => {
+                    setHours(e.target.value);
+                  }}
+                  className=" py-1 px-2 my-1 border-2 rounded-md border-primary-300 outline-none"
+                  id=""
+                >
+                  {hrs.map((num, i) => (
+                    <option value={i}>{i}</option>
+                  ))}
+                </select>
 
-          <select
-            name="addno"
-            value={minutes}
-            onChange={(e) => {
-              setMinutes(e.target.value);
-            }}
-            className=" py-1 px-2 my-1 border-2 rounded-md border-primary-300 outline-none"
-            id=""
-          >
-            {min.map((num, i) => (
-              <option value={i}>{i}</option>
-            ))}
-          </select>
+                <select
+                  name="addno"
+                  value={minutes}
+                  onChange={(e) => {
+                    setMinutes(e.target.value);
+                  }}
+                  className=" py-1 px-2 my-1 border-2 rounded-md border-primary-300 outline-none"
+                  id=""
+                >
+                  {min.map((num, i) => (
+                    <option value={i}>{i}</option>
+                  ))}
+                </select>
 
-          <select
-            name="addno"
-            value={seconds}
-            onChange={(e) => {
-              setSeconds(e.target.value);
-            }}
-            className=" py-1 px-2 my-1 border-2 rounded-md border-primary-300 outline-none"
-            id=""
-          >
-            {sec.map((num, i) => (
-              <option value={i}>{i}</option>
-            ))}
-          </select>
+                <select
+                  name="addno"
+                  value={seconds}
+                  onChange={(e) => {
+                    setSeconds(e.target.value);
+                  }}
+                  className=" py-1 px-2 my-1 border-2 rounded-md border-primary-300 outline-none"
+                  id=""
+                >
+                  {sec.map((num, i) => (
+                    <option value={i}>{i}</option>
+                  ))}
+                </select>
                 <p className=" px-4  rounded-md"></p>
               </div>
             </div>

@@ -9,10 +9,10 @@ const Step4 = ({ setStep, numbers }) => {
         </h3>
 
         <div className="flex border w-fit px-2 my-10 m-auto rounded-md border-primary-500">
-          {numbers && numbers.map((num)=>(
-            <p className="text-primary-500  p-2">{num.number}</p>
+          {numbers &&
+            numbers.map((num) => (
+              <p className="text-primary-500  p-2">{num.number}</p>
             ))}
-            
         </div>
 
         <button
@@ -29,7 +29,6 @@ const Step4 = ({ setStep, numbers }) => {
         >
           BACK TO DASHBOARD &gt;
         </button>
-
       </div>
     </>
   );

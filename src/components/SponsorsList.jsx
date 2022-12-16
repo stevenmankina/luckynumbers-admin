@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 const SponsorsList = ({ setPopup, setSponsor }) => {
-  const { isLoggedIn, resetUser, userToken } = useContext(AuthContext);
+  const { resetUser, userToken } = useContext(AuthContext);
 
   const [sponsors, setSponsors] = useState([]);
 
@@ -69,7 +69,6 @@ const SponsorsList = ({ setPopup, setSponsor }) => {
                 <input type="checkbox" name="single" />
               </th>
               <td className="p-3 flex">
-                {/* <img src="/logo192.png" className="w-10 h-10 mr-2" alt="" /> */}
                 <div className="text-left">
                   <p className="font-semibold text-sm">{sponsor.sponsorName}</p>
                   <p className="font-light text-xs">{sponsor.phone}</p>

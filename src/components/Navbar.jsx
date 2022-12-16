@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useState } from "react";
 import {
   User,
   ChartPieSlice,
-  ShoppingCartSimple,
-  CurrencyDollar,
   Tray,
   SquaresFour,
   Stack,
   EnvelopeSimple,
 } from "phosphor-react";
-
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
 const Navbar = () => {
@@ -71,6 +67,7 @@ const Navbar = () => {
 
 export default Navbar;
 
+// Navlink helper Component
 const NavLink = ({ to, children, ...props }) => {
   
     const resolvedPath = useResolvedPath(to);
