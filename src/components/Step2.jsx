@@ -148,8 +148,16 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
 
             <div className="flex-col flex">
               {len > 0 &&
-                numbers.map((obj) => (
-                  <p className="py-1 px-3 border-2 rounded-md" key={obj.number}>
+                numbers.map((obj, index) => (
+                  <p key={obj.number} className="py-1 font-semibold px-2">
+                    {index + 1}
+                  </p>
+                ))}
+            </div>
+            <div className="flex-col flex">
+              {len > 0 &&
+                numbers.map((obj, index) => (
+                  <p key={obj.number} className="py-1 px-3 border-2 rounded-md">
                     {obj.number}
                   </p>
                 ))}
@@ -177,7 +185,7 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
                 numbers.map((obj, i) => (
                   <div className="flex items-center" key={obj.number}>
                     <p className="py-1 w-full px-5 border-2 rounded-md">
-                      {obj.time.slice(3,8) }
+                      {obj.time.slice(3, 8)}
                     </p>
                     <p
                       className=" px-3  rounded-md cursor-pointer"
@@ -201,12 +209,11 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
                   >
                     {min.map((num, i) => (
                       <option value={i}>{i}</option>
-                      ))}
+                    ))}
                   </select>
-                      <p className="text-xs">Minutes</p>
+                  <p className="text-xs">Minutes</p>
                 </div>
                 <div className="">
-
                   <select
                     name="sec"
                     value={seconds}
@@ -218,9 +225,9 @@ const Step2 = ({ setStep, numbers, setNumbers, duration }) => {
                   >
                     {sec.map((num, i) => (
                       <option value={i}>{i}</option>
-                      ))}
+                    ))}
                   </select>
-                      <p className="text-xs">Seconds</p>
+                  <p className="text-xs">Seconds</p>
                 </div>
                 <p className=" px-4  rounded-md"></p>
               </div>
