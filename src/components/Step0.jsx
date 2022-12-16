@@ -12,11 +12,8 @@ const Step0 = ({ setStep, getAllGames, games }) => {
   const { resetUser } = useContext(AuthContext);
 
   const [numbers, setNumbers] = useState([5, 8, 9, 7, 6]);
-
   const [popup, setPopup] = useState(false);
-
   const [game, setGame] = useState(null);
-
   const [timePopup, setTimePopup] = useState(false);
 
   const deleteGame = async (gameId) => {

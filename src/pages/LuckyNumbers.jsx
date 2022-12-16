@@ -20,9 +20,9 @@ const LuckyNumbers = () => {
   const { resetUser, userToken } = useContext(AuthContext);
 
   const [step, setStep] = useState(0);
-  const [datetime, setDatetime] = useState(null);
+  const [datetime, setDatetime] = useState("");
   const [numbers, setNumbers] = useState([]);
-  const [duration, setDuration] = useState("00:00:00");
+  const [duration, setDuration] = useState("01:00:00");
   const [winning, setWinning] = useState({ win_at: 0, win_from: 0 });
   const [games, setGames] = useState([]);
 
