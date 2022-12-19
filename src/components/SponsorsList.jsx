@@ -45,18 +45,21 @@ const SponsorsList = ({ setPopup, setSponsor }) => {
 
   return (
     <>
+      <button
+        onClick={() => setPopup(true)}
+        className="px-10 bg-primary-500 py-2 float-right mb-10 mr-24 text-white"
+      >
+        ADD &gt;{" "}
+      </button>
+
       <table className="md:table-auto w-11/12 md:m-5 ">
         <thead className="bg-neutral-100">
           <tr className="font-thin uppercase outline-1 outline-gray-200 outline rounded-sm">
-            <th className="p-3">
-              <input type="checkbox" name="allCheck" id="" />
-            </th>
-            <th className="p-3 text-left font-normal">Sponsor Name</th>
+            <th className="p-3 pl-8 text-left font-normal">Sponsor Name</th>
             <th className="p-3 max-md:hidden font-normal">Contact Name</th>
             <th className="p-3 max-md:hidden font-normal">Email</th>
             <th className="p-3 max-md:hidden font-normal">No. Live Adverts</th>
             <th className="p-3 max-md:hidden font-normal">Edit</th>
-            <th className="p-3 font-normal">Active</th>
           </tr>
         </thead>
         <tbody>
@@ -65,10 +68,7 @@ const SponsorsList = ({ setPopup, setSponsor }) => {
               key={sponsor._id}
               className="outline-1 outline-gray-200 outline rounded-sm "
             >
-              <th>
-                <input type="checkbox" name="single" />
-              </th>
-              <td className="p-3 flex">
+              <td className="p-3 pl-8 flex">
                 <div className="text-left">
                   <p className="font-semibold text-sm">{sponsor.sponsorName}</p>
                   <p className="font-light text-xs">{sponsor.phone}</p>
@@ -83,25 +83,18 @@ const SponsorsList = ({ setPopup, setSponsor }) => {
               </td>
               <td
                 className="text-sm max-md:hidden cursor-pointer"
-                onClick={() => {setPopup(true); setSponsor(sponsor)}}
+                onClick={() => {
+                  setPopup(true);
+                  setSponsor(sponsor);
+                }}
               >
                 {" "}
                 <Wrench size={20} className="m-auto" />{" "}
-              </td>
-              <td>
-                <input type="checkbox" name="active" id="" />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-
-      <button
-        onClick={() => setPopup(true)}
-        className="px-10 bg-primary-500 py-2 float-right mr-24 text-white"
-      >
-        ADD &gt;{" "}
-      </button>
     </>
   );
 };

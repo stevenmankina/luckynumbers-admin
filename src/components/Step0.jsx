@@ -7,6 +7,8 @@ import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../util/config";
 import { getDate, getTime } from "../util/age";
 import EditTimestamp from "./EditTimestamp";
+import moment from "moment";
+import { dateFormat } from "../util/constants";
 
 const Step0 = ({ setStep, getAllGames, games }) => {
   const { resetUser } = useContext(AuthContext);
@@ -38,6 +40,7 @@ const Step0 = ({ setStep, getAllGames, games }) => {
     }
   };
 
+  // invokes getAllGame function when page loads
   useEffect(() => {
     getAllGames();
   }, []);
@@ -61,12 +64,16 @@ const Step0 = ({ setStep, getAllGames, games }) => {
         <h3 className="text-4xl pb-5 text-primary-500">Saved Episodes</h3>
         <h3 className="text-xl my-7 text-primary-500">Saved Winning Numbers</h3>
 
+        <button
+          onClick={() => setStep(1)}
+          className="px-10  bg-primary-500 py-2 mb-5 mx-16 float-right uppercase text-white"
+        >
+          Add New Show &gt;
+        </button>
+
         <table className="md:table-auto w-11/12 m-auto ">
           <thead className="bg-neutral-100">
             <tr className="font-thin uppercase outline-1 outline-gray-200 outline rounded-sm">
-              <th className="p-3">
-                <input type="checkbox" name="allCheck" id="" />
-              </th>
               <th className="p-3 font-normal">Episode</th>
               <th className="p-3 max-md:hidden font-normal">Date</th>
               <th className="p-3 max-md:hidden font-normal">Time</th>
@@ -80,9 +87,6 @@ const Step0 = ({ setStep, getAllGames, games }) => {
                 key={game._id}
                 className="outline-1 outline-gray-200 outline rounded-sm "
               >
-                <th>
-                  <input type="checkbox" name="single" id="" />
-                </th>
                 <td className="text-sm p-3 max-md:hidden">{index + 1}</td>
                 <td
                   onClick={() => {
@@ -91,7 +95,7 @@ const Step0 = ({ setStep, getAllGames, games }) => {
                   }}
                   className="text-sm cursor-pointer text-primary-500 max-md:hidden"
                 >
-                  {getDate(game.starts_at)}
+                  {moment(game.starts_at).format(dateFormat)}
                 </td>
                 <td
                   onClick={() => {
@@ -125,13 +129,6 @@ const Step0 = ({ setStep, getAllGames, games }) => {
             ))}
           </tbody>
         </table>
-
-        <button
-          onClick={() => setStep(1)}
-          className="px-10  bg-primary-500 py-2 m-10 float-right uppercase text-white"
-        >
-          Add New Show &gt;
-        </button>
       </div>
     </>
   );

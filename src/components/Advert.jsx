@@ -38,6 +38,7 @@ const Advert = ({ sid, id, getSponsor }) => {
       }
     }
   };
+  
   const deleteAdvert = async () => {
     let url = `${BASE_URL}/advert/${sid}/${id}/delete`;
 

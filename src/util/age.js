@@ -1,3 +1,6 @@
+import moment from "moment";
+import { dateFormat } from "./constants";
+
 export const getAge = (dob) => {
   let today = new Date().getFullYear();
   let date = new Date(dob).getFullYear();
@@ -54,7 +57,7 @@ export const formatDateTime = (timestamp) => {
 
   if(timestamp === undefined) return;
   
-  let date = timestamp.slice(0, 10);
+  let date = moment(timestamp).format(dateFormat);
   let time = timestamp.slice(11, 16)
   
   return `${date} - ${time}` ;
