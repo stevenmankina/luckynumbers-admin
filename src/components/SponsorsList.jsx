@@ -49,7 +49,7 @@ const SponsorsList = ({ setPopup, setSponsor }) => {
         onClick={() => setPopup(true)}
         className="px-10 bg-primary-500 py-2 float-right mb-10 mr-24 text-white"
       >
-        ADD &gt;{" "}
+        ADD NEW SPONSOR &gt;{" "}
       </button>
 
       <table className="md:table-auto w-11/12 md:m-5 ">
