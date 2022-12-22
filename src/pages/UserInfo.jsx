@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
 import SearchBar from "../components/SearchBar";
 import Title from "../components/Title";
-import { getAge, getDate } from "../util/age";
+import { getAge } from "../util/age";
 import { BASE_URL } from "../util/config";
 import UserProfile from "./UserProfile";
 import moment from "moment/moment";
@@ -18,6 +18,7 @@ const UserInfo = () => {
   const [popup, setPopup] = useState(false);
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState(null);
+  const [page, setPage] = useState(1);
 
   const searchUsers = async (search, searchValue) => {
     if (search === null || search === undefined) {
@@ -60,7 +61,7 @@ const UserInfo = () => {
   };
 
   const getAllUsers = async () => {
-    let url = `${BASE_URL}/user/searchAll`;
+    let url = `${BASE_URL}/user/searchAll?page=${page}&limit=15`;
 
     try {
       let res = await axios.get(url, {
@@ -84,10 +85,19 @@ const UserInfo = () => {
     }
   };
 
+  const prevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+  const nextPage = () => {
+    setPage(page + 1);
+  };
+
   // invokes getAllUsers function When page loads
   useEffect(() => {
     getAllUsers();
-  }, []);
+  }, [page]);
 
   return (
     <>
@@ -155,6 +165,34 @@ const UserInfo = () => {
           </tbody>
         </table>
         {users && users.length === 0 && <p>No User Found with given filter</p>}
+      </div>
+
+      <div className="mb-10">
+        <nav aria-label="Page navigation">
+          <ul class="inline-flex">
+            <li>
+              <button
+                onClick={prevPage}
+                class="h-10 px-5 text-primary-500 transition-colors duration-150 rounded-l-lg focus:shadow-outline hover:bg-primary-100"
+              >
+                Prev
+              </button>
+            </li>
+            <li>
+              <button class="h-10 px-5 text-white transition-colors duration-150 bg-primary-500 border border-r-0 border-primary-500 focus:shadow-outline">
+                {page}
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={nextPage}
+                class="h-10 px-5 text-primary-500 transition-colors duration-150 bg-white rounded-r-lg focus:shadow-outline hover:bg-primary-100"
+              >
+                Next
+              </button>
+            </li>
+          </ul>
+        </nav>
       </div>
     </>
   );
