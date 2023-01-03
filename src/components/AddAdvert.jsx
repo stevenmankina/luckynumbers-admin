@@ -73,6 +73,8 @@ const AddAdvert = ({ setAdvertPopup, sid, getSponsor }) => {
               onChange={(e) => setMedia(e.target.files[0])}
               required
             />
+            <p className="text-left text-xs">Max file size should be 1 MB</p>
+
 
             <p className="text-left mt-3 font-semibold">Start At</p>
             <input
